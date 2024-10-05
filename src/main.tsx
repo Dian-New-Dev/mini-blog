@@ -7,12 +7,30 @@ import {
 } from "react-router-dom"
 
 import './index.css'
-import HomePage from './pages/HomePage'
+
+import Login from './pages/Login'
+import Cadastro from './pages/Cadastro'
+import Root from './routes/root'
+import ErrorPage from './pages/ErrorPage'
+
+
 
 const router = createBrowserRouter([
     {
+        //elemento root route, o resto renderiza dentro dele
         path: "/",
-        element: <HomePage />,
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "/login",
+                element: <Login />
+            },
+            {
+                path: "/sign-up",
+                element: <Cadastro />
+            }
+        ]
     },
 ]);
 
