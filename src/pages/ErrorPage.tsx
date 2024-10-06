@@ -1,5 +1,5 @@
 import React from 'react';
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+import { isRouteErrorResponse, useRouteError, Link } from 'react-router-dom';
 
 const ErrorPage: React.FC = () => {
 
@@ -42,8 +42,9 @@ const ErrorPage: React.FC = () => {
                 rounded-lg
                 text-green-200
                 hover:bg-green-950
-                '
-                >Voltar ao Início</button>
+                '>
+                    <Link to={`/`}>Voltar ao Início</Link>
+                </button>
             </div>
             
             

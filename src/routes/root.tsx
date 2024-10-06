@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 const Root: React.FC = () => {
     return (
@@ -21,13 +21,13 @@ const Root: React.FC = () => {
             border-green-200
             "
             >
-                <h1
+                <Link to={`/`}
                 className="
                 text-3xl
                 text-blue-500
                 font-bold
                 
-                ">Mini BlEg</h1>
+                ">Mini BlEg</Link>
 
                 <div 
                 id='painel-usuario'
@@ -41,8 +41,8 @@ const Root: React.FC = () => {
                 bg-green-900
                 "
                 >
-                    <a href="/login">Login</a>
-                    <a href="/sign-up">Cadastre-se</a>
+                    <Link to="/login">Login</Link>
+                    <Link to="/sign-up">Cadastre-se</Link>
 
                 </div>
 
