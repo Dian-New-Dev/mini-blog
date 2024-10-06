@@ -6,3 +6,15 @@
     min-width: 0;
     box-sizing: border-box;
 }
+
+.outlet-components {
+    width: full;
+    height:fit-content;
+    background-color: #052e16;
+    padding: 32px;
+    border: 4px double #bbf7d0;
+    display: grid;
+    place-items: center;
+    color: #bbf7d0;
+
+}

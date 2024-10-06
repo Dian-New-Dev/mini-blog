@@ -5,17 +5,20 @@ import { Outlet } from "react-router-dom";
 const Root: React.FC = () => {
     return (
         <div className="flex">
-            <div
-            id="sidebar"
+            <div id="sidebar"
             className="
             w-2/12
+            min-w-[200px]
             p-8
             h-screen
             bg-green-950
-            text-gray-200
+            text-green-200
             flex
             flex-col
             gap-4
+            border-r-4
+            border-double
+            border-green-200
             "
             >
                 <h1
@@ -33,6 +36,7 @@ const Root: React.FC = () => {
                 flex-col
                 gap-2
                 border
+                border-green-200
                 p-4
                 bg-green-900
                 "
@@ -49,9 +53,52 @@ const Root: React.FC = () => {
                     </nav>
             </div>
 
-            <div id="detail">
-                <Outlet />
+            <div className="flex flex-col 
+                w-full
+                bg-green-300
+                p-8
+                gap-4
+                ">
+                <div id="header">
+                    <div className="
+                    flex
+                    flex-col
+                    gap-4
+                    p-4
+                    bg-green-950
+                    border-4
+                    border-double
+                    border-green-200
+                    
+                    
+                    ">
+                        <h2 className="
+                        text-4xl
+                        font-bold
+                        text-green-200
+                        ">Um blog, infinitas ideias</h2>
+                        
+                        <h3 className="
+                        text-xl
+                        italic
+                        text-green-200
+                        ">Os ecos de uma mente soam tão
+                            absurdos e surreais quanto os
+                            gritos de um deus cósmico contemplando
+                            o vazio de sua existência.
+
+                        </h3>
+                    </div>
+
+                </div>
+                
+                <div id="outlet">
+                    <Outlet />
+                </div>
+
             </div>
+            
+
 
         </div>
     )
@@ -59,3 +106,4 @@ const Root: React.FC = () => {
 }
 
 export default Root;
+
