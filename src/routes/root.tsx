@@ -1,9 +1,16 @@
 
-import React from "react";
+import React, {useState} from "react";
 import { Outlet, Link } from "react-router-dom";
 import ListaDePostagens from "../pages/ListaDePostagens";
 
 const Root: React.FC = () => {
+
+
+    function renderizarLista() {
+        setReRenderizar(prev => prev +1)
+    }
+
+
     return (
         <div className="flex">
             <div id="sidebar"
@@ -54,7 +61,7 @@ const Root: React.FC = () => {
                     hover:bg-blue-800
                     hover:scale-110
                     font-bold">
-                        <Link to="/novo-post">Novo Post</Link>
+                        <Link onClick={renderizarLista} to="/novo-post">Novo Post</Link>
                     </button>
 
                 </div>
@@ -63,7 +70,7 @@ const Root: React.FC = () => {
 
                     <nav>
                         <ul>
-                            <ListaDePostagens />
+                            <ListaDePostagens reRenderizar={reRenderizar} />
                         </ul>
                     </nav>
             </div>

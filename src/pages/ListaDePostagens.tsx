@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-const ListaDePostagens: React.FC = () => {
+interface ListaDePostagensProps {
+    reRenderizar: number;
+}
+
+const ListaDePostagens: React.FC<ListaDePostagensProps> = ( {reRenderizar} ) => {
 
     const [listaDePosts, setListaDePosts] = useState<string[]>([])
 
     useEffect(() =>{
+        console.log('foi chamada a funcao')
         const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
         if (arrayDePosts !== null) {
             mapearPosts(arrayDePosts)
         }
 
        
-    }, [])
+    }, [reRenderizar])
 
     function mapearPosts(array) {
         const parsedArray = JSON.parse(array);

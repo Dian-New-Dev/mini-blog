@@ -14,8 +14,6 @@ import Root from './routes/root'
 import ErrorPage from './pages/ErrorPage'
 import NovoPost from './pages/NovoPost'
 
-
-
 const router = createBrowserRouter([
     {
         //elemento root route, o resto renderiza dentro dele
@@ -36,7 +34,7 @@ const router = createBrowserRouter([
                 element: <NovoPost />
             }
         ]
-    },
+    },   
 ]);
 
 
