@@ -10,7 +10,7 @@ const ListaDePostagens: React.FC = () => {
             mapearPosts(arrayDePosts)
         }
 
-        
+       
     }, [])
 
     function mapearPosts(array) {

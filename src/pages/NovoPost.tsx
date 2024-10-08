@@ -21,17 +21,23 @@ const NovoPost: React.FC = () => {
     
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-
-        setArrayDeObjetosOG(prevArray => [...prevArray, {titulo: itemTitle, corpo: itemBody }]);
-
-            
-
-
+        const novoPost = {titulo: itemTitle, corpo: itemBody};
+        setArrayDeObjetosOG(prevArray => [...prevArray, novoPost]);
     }
 
     useEffect(() => {
-        console.log(arrayDeObjetosOG)
-        localStorage.setItem("arrayDeObjetosOG", JSON.stringify(arrayDeObjetosOG))
+        // Carregar dados do localStorage ao montar o componente
+        const savedPosts = localStorage.getItem('arrayDeObjetosOG');
+        if (savedPosts) {
+            setArrayDeObjetosOG(JSON.parse(savedPosts));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (arrayDeObjetosOG.length > 0) { //sem esse if, o useEffect resetaria o localstorage a cada montagem
+            console.log(arrayDeObjetosOG)
+            localStorage.setItem("arrayDeObjetosOG", JSON.stringify(arrayDeObjetosOG));
+        }
     }, [arrayDeObjetosOG])
 
     return (
