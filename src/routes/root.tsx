@@ -39,12 +39,26 @@ const Root: React.FC = () => {
                 border-green-200
                 p-4
                 bg-green-900
+                items-start
                 "
                 >
                     <Link to="/login">Login</Link>
                     <Link to="/sign-up">Cadastre-se</Link>
 
+                    <button className="
+                    bg-blue-600
+                    p-2
+                    border
+                    border-gray-700
+                    hover:bg-blue-800
+                    hover:scale-110
+                    font-bold">
+                        <Link to="/novo-post">Novo Post</Link>
+                    </button>
+
                 </div>
+
+                
 
                     <nav>
                         <ul>
