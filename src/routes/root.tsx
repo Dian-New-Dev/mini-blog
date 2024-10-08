@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
+import ListaDePostagens from "../pages/ListaDePostagens";
 
 const Root: React.FC = () => {
     return (
@@ -62,7 +63,7 @@ const Root: React.FC = () => {
 
                     <nav>
                         <ul>
-                            //aqui vão as postagens
+                            <ListaDePostagens />
                         </ul>
                     </nav>
             </div>

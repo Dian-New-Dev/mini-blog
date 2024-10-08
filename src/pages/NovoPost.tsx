@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-interface arrayDeObjetos {
+interface arrayDeObjetosOG {
     titulo: string;
     corpo: string;
 }
@@ -9,8 +9,8 @@ const NovoPost: React.FC = () => {
 
     const [itemTitle, setItemTitle] = useState<string[]>([]);
     const [itemBody, setItemBody] = useState<string[]>([]);
-    const [arrayDeObjetos, setArrayDeObjetos] = useState<arrayDeObjetos[]>([]);
-    
+    const [arrayDeObjetosOG, setArrayDeObjetosOG] = useState<arrayDeObjetosOG[]>([]);
+
     function handleInputTitle(e:React.ChangeEvent<HTMLInputElement>) {
         setItemTitle(e.target.value)
     }
@@ -22,7 +22,7 @@ const NovoPost: React.FC = () => {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        setArrayDeObjetos(prevArray => [...prevArray, {titulo: itemTitle, corpo: itemBody }]);
+        setArrayDeObjetosOG(prevArray => [...prevArray, {titulo: itemTitle, corpo: itemBody }]);
 
             
 
@@ -30,8 +30,9 @@ const NovoPost: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log(arrayDeObjetos)
-    }, [arrayDeObjetos])
+        console.log(arrayDeObjetosOG)
+        localStorage.setItem("arrayDeObjetosOG", JSON.stringify(arrayDeObjetosOG))
+    }, [arrayDeObjetosOG])
 
     return (
         <div 
@@ -57,6 +58,8 @@ const NovoPost: React.FC = () => {
                     <button type='submit'>Postar</button>
                 </form>
             </div>
+
+           
             
         </div>
     );
