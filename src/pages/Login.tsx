@@ -27,8 +27,8 @@ const Login: React.FC = () => {
                 h-fit' 
                 action="#">
 
-                    <input className='p-2 w-full' type="text" placeholder='Usuário' />
-                    <input className='p-2 w-full' type="password" placeholder='Senha' />
+                    <input className='p-2 w-full text-green-900' type="text" placeholder='Usuário' />
+                    <input className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
 
                     <div className='flex items-center w-full px-2'>
                         <div className='w-1/2 flex gap-2 items-center'>

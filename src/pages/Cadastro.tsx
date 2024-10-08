@@ -26,10 +26,10 @@ const Registrar: React.FC = () => {
             gap-4
             h-fit' 
             action="#">
-                <input className='p-2 w-full' type="text" placeholder='E-mail' />
-                <input className='p-2 w-full' type="text" placeholder='Nome de Usuário' />
-                <input className='p-2 w-full' type="password" placeholder='Senha' />
-                <input className='p-2 w-full' type="password" placeholder='Repita a Senha' />
+                <input className='p-2 w-full text-green-900' type="text" placeholder='E-mail' />
+                <input className='p-2 w-full text-green-900' type="text" placeholder='Nome de Usuário' />
+                <input className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
+                <input className='p-2 w-full text-green-900' type="password" placeholder='Repita a Senha' />
 
 
 
