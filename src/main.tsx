@@ -13,6 +13,7 @@ import Cadastro from './pages/Cadastro'
 import Root from './routes/root'
 import ErrorPage from './pages/ErrorPage'
 import NovoPost from './pages/NovoPost'
+import Post from './pages/Post'
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "/novo-post",
                 element: <NovoPost />
+            },
+            {
+                path: "/",
+                element: <Post />
             }
         ]
     },   
