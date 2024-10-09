@@ -2,16 +2,17 @@
 import React, {useEffect, useState} from "react";
 import { Outlet, Link } from "react-router-dom";
 import ListaDePostagens from "../pages/ListaDePostagens";
+import UltimoPost from "../pages/UltimoPost";
 
 const Root: React.FC = () => {
 
+    //controlar atualizacao da lista de postagens
     const [reRenderizar, setReRenderizar] = useState<number>(0);
-
     useEffect(() => {
-        console.log('useEffect do pai foi ativado')
     }, [reRenderizar])
-    
-    console.log(`aqui no pai, o valor de reRenderizar é ${reRenderizar} `)
+
+    //controlar renderização condicional de UltimoPost / Outlet
+    const [clicouEmLinks, setClicouEmLinks] = useState<boolean>(false)
     
     return (
         <div className="
@@ -136,7 +137,11 @@ const Root: React.FC = () => {
                 ">
                     <div id="outlet" className="
                     flex-grow">
+                        {clicouEmLinks ?
                         <Outlet context={[reRenderizar, setReRenderizar]} />
+                        : <UltimoPost />}
+                        
+                        
                     </div>
 
                     <div id="footer" className="
