@@ -72,7 +72,7 @@ const Root: React.FC = () => {
 
                     <nav>
                         <ul>
-                            {reRenderizar > 0 && <ListaDePostagens reRenderizar={reRenderizar} />}
+                            {<ListaDePostagens reRenderizar={reRenderizar} />}
                         </ul>
                     </nav>
             </div>
