@@ -10,7 +10,7 @@ const NovoPost: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const [reRenderizar, setReRenderizar] = useOutletContext();
+    const [reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks] = useOutletContext();
 
     const [itemTitle, setItemTitle] = useState<string[]>([]);
     const [itemBody, setItemBody] = useState<string[]>([]);
@@ -39,6 +39,8 @@ const NovoPost: React.FC = () => {
         setReRenderizar(prev => prev + 1);
 
         navigate("/")
+
+        setClicouEmLinks(false)
     }
     
 

@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 interface ListaDePostagensProps {
     reRenderizar: number;
+    setClicouEmLinks: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => {
+const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
 
     const [listaDePosts, setListaDePosts] = useState<any[]>([])
 
@@ -19,6 +20,10 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => 
 
        
     }, [reRenderizar])
+
+    function linkClicado() {
+        setClicouEmLinks(true)
+    }
 
     return (
         <div className='
@@ -61,7 +66,7 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => 
                     hover:scale-105
                     hover:text-green-300
                     `}>
-                        <NavLink to={`/post/${item.titulo}`}>
+                        <NavLink onClick={linkClicado} to={`/post/${item.titulo}`}>
                             {item.titulo}
                         </NavLink>
                     </li>

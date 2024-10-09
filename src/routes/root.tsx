@@ -13,6 +13,15 @@ const Root: React.FC = () => {
 
     //controlar renderização condicional de UltimoPost / Outlet
     const [clicouEmLinks, setClicouEmLinks] = useState<boolean>(false)
+    function linkClicado() {
+        setClicouEmLinks(true)
+    }
+
+    function clicouEmBleg() {
+        setClicouEmLinks(false)
+
+    }
+    
     
     return (
         <div className="
@@ -37,6 +46,7 @@ const Root: React.FC = () => {
             "
             >
                 <Link to={`/`}
+                onClick={clicouEmBleg}
                 className="
                 text-3xl
                 text-blue-500
@@ -57,8 +67,8 @@ const Root: React.FC = () => {
                 items-start
                 "
                 >
-                    <Link to="/login">Login</Link>
-                    <Link to="/sign-up">Cadastre-se</Link>
+                    <Link onClick={linkClicado} to="/login">Login</Link>
+                    <Link onClick={linkClicado} to="/sign-up">Cadastre-se</Link>
 
                     <button className="
                     bg-blue-600
@@ -67,7 +77,9 @@ const Root: React.FC = () => {
                     border-gray-700
                     hover:bg-blue-800
                     hover:scale-110
-                    font-bold">
+                    font-bold"
+                    onClick={linkClicado}
+                    >
                         <Link to="/novo-post">Novo Post</Link>
                     </button>
 
@@ -77,7 +89,7 @@ const Root: React.FC = () => {
 
                     <nav className="">
                         <ul>
-                            {<ListaDePostagens reRenderizar={reRenderizar} />}
+                            {<ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
                         </ul>
                     </nav>
             </div>
@@ -138,7 +150,7 @@ const Root: React.FC = () => {
                     <div id="outlet" className="
                     flex-grow">
                         {clicouEmLinks ?
-                        <Outlet context={[reRenderizar, setReRenderizar]} />
+                        <Outlet context={[reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks]} />
                         : <UltimoPost />}
                         
                         
