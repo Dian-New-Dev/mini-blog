@@ -4,40 +4,76 @@ interface ListaDePostagensProps {
     reRenderizar: number;
 }
 
-const ListaDePostagens: React.FC<ListaDePostagensProps> = ( {reRenderizar} ) => {
+const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => {
 
-    const [listaDePosts, setListaDePosts] = useState<string[]>([])
+    const [listaDePosts, setListaDePosts] = useState<any[]>([])
 
     useEffect(() =>{
-        console.log('foi chamada a funcao')
+        console.log(`useEffect de ListaDePostages acionado, pois reRenderizar tem valor ${reRenderizar}`)
         const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
         if (arrayDePosts !== null) {
-            mapearPosts(arrayDePosts)
+           const parsedArray = JSON.parse(arrayDePosts);
+           setListaDePosts(parsedArray)
         }
 
        
     }, [reRenderizar])
 
-    function mapearPosts(array) {
-        const parsedArray = JSON.parse(array);
-        console.log(parsedArray[0]);
-
-        const lista = parsedArray.map((item, index) => (
-            <div key={index} className={``}>
-                {item.titulo}
-            </div>
-        ));
-        setListaDePosts(lista)
-
-        }
-
-    
     return (
         <div>
-            {listaDePosts}
+            {listaDePosts.map((item, index) => (
+                <div key={index} className={``}>
+                    {item.titulo}
+
+                </div>
+            ))}
         </div>
         
     );
 };
 
 export default ListaDePostagens;
+
+// import React, { useEffect, useState } from 'react';
+
+// interface ListaDePostagensProps {
+//     reRenderizar: number;
+// }
+
+// const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => {
+
+//     const [listaDePosts, setListaDePosts] = useState<any[]>([])
+
+//     useEffect(() =>{
+//         console.log(`useEffect de ListaDePostages acionado, pois reRenderizar tem valor ${reRenderizar}`)
+//         const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
+//         if (arrayDePosts !== null) {
+//             mapearPosts(arrayDePosts)
+//         }
+
+       
+//     }, [reRenderizar])
+
+//     function mapearPosts(array) {
+//         const parsedArray = JSON.parse(array);
+//         console.log(parsedArray[0]);
+
+//         const lista = parsedArray.map((item, index) => (
+//             <div key={index} className={``}>
+//                 {item.titulo}
+//             </div>
+//         ));
+//         setListaDePosts(lista)
+
+//         }
+
+    
+//     return (
+//         <div>
+//             {listaDePosts}
+//         </div>
+        
+//     );
+// };
+
+// export default ListaDePostagens;

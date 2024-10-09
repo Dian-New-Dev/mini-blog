@@ -1,16 +1,18 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Outlet, Link } from "react-router-dom";
 import ListaDePostagens from "../pages/ListaDePostagens";
 
 const Root: React.FC = () => {
 
+    const [reRenderizar, setReRenderizar] = useState<number>(0);
 
-    function renderizarLista() {
-        setReRenderizar(prev => prev +1)
-    }
-
-
+    useEffect(() => {
+        console.log('useEffect do pai foi ativado')
+    }, [reRenderizar])
+    
+    console.log(`aqui no pai, o valor de reRenderizar é ${reRenderizar} `)
+    
     return (
         <div className="flex">
             <div id="sidebar"
@@ -61,7 +63,7 @@ const Root: React.FC = () => {
                     hover:bg-blue-800
                     hover:scale-110
                     font-bold">
-                        <Link onClick={renderizarLista} to="/novo-post">Novo Post</Link>
+                        <Link to="/novo-post">Novo Post</Link>
                     </button>
 
                 </div>
@@ -70,7 +72,7 @@ const Root: React.FC = () => {
 
                     <nav>
                         <ul>
-                            <ListaDePostagens reRenderizar={reRenderizar} />
+                            {reRenderizar > 0 && <ListaDePostagens reRenderizar={reRenderizar} />}
                         </ul>
                     </nav>
             </div>
@@ -115,7 +117,7 @@ const Root: React.FC = () => {
                 </div>
                 
                 <div id="outlet">
-                    <Outlet />
+                    <Outlet context={[reRenderizar, setReRenderizar]} />
                 </div>
 
             </div>

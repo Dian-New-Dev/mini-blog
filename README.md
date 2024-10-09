@@ -67,3 +67,29 @@ A solução:
 Aqui, o if garante que o localStorage só seja acionado se o array tiver um lenght maior que 0, impedindo que um array vazio seja salvo e, portanto, impendindo que essa funçaõ tente salvar no localstorage durante remontagem.
 
 O resultado são os valores salvos no local storage persistindo remontagens.
+
+2) Em react router, há vários componentes que não estão necessariamente linkados por parentagem. Isso dificulta a transmissão de dados entre eles via props. Encontramos um contorno a esse problema com useContext, o qual permite declarar props universalmente acessíveis a qualquer componente dentro da UI tree.
+
+3) o uso de context provou-se problemático e desnecessário. Usamos props passadas do root para componentes filho diretos e para rotas dentro do Outlet, usou-se método do react router nativo para passar props ao Outlet:
+
+```
+
+                    <Outlet context={[reRenderizar, setReRenderizar]} />
+
+
+```
+
+4) Ao adicionar uma nova postagem no componente NovoPost, o estado de ListaDePostagens não era atualizado corretamente. O valor exibido de listaDePosts estava sempre um passo atrás, mostrando o estado anterior após a alteração do valor de reRenderizar. 
+
+Isso ocorreu porque a atualização do localStorage e do estado arrayDeObjetosOG não estava sincronizada com a chamada de setReRenderizar, levando a uma renderização atrasada no componente ListaDePostagens.
+
+Para resolver esse problema, as seguintes alterações foram feitas:
+
+- Atualização do Estado reRenderizar: A chamada para setReRenderizar foi movida para dentro do handleSubmit do componente NovoPost, garantindo que o estado reRenderizar seja atualizado após a nova postagem ser armazenada no localStorage. Isso assegurou que o componente ListaDePostagens reagisse ao estado mais recente.
+
+- Carregamento Inicial do Estado: Ao carregar os dados do localStorage no useEffect, a atualização do estado arrayDeObjetosOG foi feita e setReRenderizar foi chamado para garantir que o componente ListaDePostagens refletisse as postagens carregadas imediatamente.
+
+Essas alterações garantiram que a renderização de ListaDePostagens estivesse sempre sincronizada com as alterações no estado, resultando em uma atualização imediata após a adição de novas postagens.
+
+
+
