@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface ListaDePostagensProps {
     reRenderizar: number;
@@ -23,8 +24,9 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => 
         <div>
             {listaDePosts.map((item, index) => (
                 <div key={index} className={``}>
-                    {item.titulo}
-
+                    <NavLink to={`/post/${item.titulo}`}>
+                        {item.titulo}
+                    </NavLink>
                 </div>
             ))}
         </div>

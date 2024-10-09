@@ -35,7 +35,7 @@ const router = createBrowserRouter([
                 element: <NovoPost />
             },
             {
-                path: "/",
+                path: '/post/:postId',
                 element: <Post />
             }
         ]
