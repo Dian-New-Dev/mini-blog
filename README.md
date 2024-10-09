@@ -24,9 +24,11 @@
 - Tailwind
 - React Router
 
-## Problema: como criar novo post
+## Mapeamento de problemas
 
-- criar botao "nova postagem"
+### Problema: como criar novo post
+
+~~- criar botao "nova postagem"
 - abrir tela padrao com inputs para titulo e texto
 - funcao que pega o valor dos inputs e lhes insere em un objeto
 - nome do objeto: postagem(numero)
@@ -34,7 +36,33 @@
 - estrutura objeto: titulo, corpo do texto, link
 - link precisa ser o titulo em letra minuscula e sem espaço
 - criar componente padrão que puxa o link e renderiza o objeto/postagem correspondente ao link
-- cada objeto deve ter uma entrada na navbar
+- cada objeto deve ter uma entrada na navbar~~
+
+- Solução: uso de Navlinks para links dinamicos + localStorage para armazenar e acessar posts
+
+### Problema: como implementar autenticação de usuário
+
+- usuario cria conta
+- localStorage: usuario e senha
+- se "usuario" não está presente no localStorage, envia e-mail confirmando cadastro
+- se "usuario" esta presente no localStorage, informar que usuario já está cadastrado
+- o que fazer se usuario esqueceu senha?
+- usuario tenta fazer login
+- componente login checa se há um par correspondente ao usuario + senha inputados pelo usuario
+- se não, informar do erro e apagar senha do campo de texto
+- se sim, direcionar o usuário à um componente pessoal
+- componente pessoal: edição de postagens (adicionar, deletar posts) e descrição de perfil
+- localStorage: perfil de usuario
+- se login, renderizar um componente no root exibindo perfil do usuário logado (quem sou eu, foto, etc)
+
+### Problema: como transitar do localStorage para um banco de dados de posts e usuários
+
+- armazenamento em local storage é provisório
+- usar MongoDB
+
+### Problema: como alcançar um design moderno
+
+- design atual é feio e antiquado
 
 ## Aprendizado
 
@@ -92,5 +120,7 @@ Para resolver esse problema, as seguintes alterações foram feitas:
 Essas alterações garantiram que a renderização de ListaDePostagens estivesse sempre sincronizada com as alterações no estado, resultando em uma atualização imediata após a adição de novas postagens.
 
 5) CSS: flex-grow faz com que um dos items dentro de um container flex cresça o máximo possível dentro do mesmo.
+
+6) useNavigate (hook do react router) permite "forçar" a aplicação a acessar um link específico após determinado evento.
 
 
