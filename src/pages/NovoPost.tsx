@@ -64,21 +64,53 @@ const NovoPost: React.FC = () => {
         grid
         place-items-center
         w-full
-        h-full'>
-            <div>
+        h-full
+        p-4
+        text-center
+        bg-green-950
+        border-4
+        border-double
+        border-green-200
+        text-green-200'>
+            <div className='
+            w-full
+            h-full'>
                 <form className='
+                w-full
+                h-full
                 flex
                 flex-col
-                gap-4' 
+                gap-2' 
                 onSubmit={handleSubmit}>
                     <label htmlFor="titulo">Título</label>
-                    <input onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
+                    <input className='
+                    text-green-950
+                    p-2
+                    '
+                    onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
                     
-                    <label htmlFor="novo-post">Corpo do Texto</label>
-                    <textarea onChange={handleInputBody} name="novo-post" id="novo-post" />
+                    <label htmlFor="novo-post">Texto</label>
+                    <textarea className='
+                    flex-grow
+                    text-green-950
+                    p-2
+                    '
+                    onChange={handleInputBody} name="novo-post" id="novo-post" />
                     
                 
-                    <button type='submit'>Postar</button>
+                    <button className='
+                    bg-blue-600
+                    p-2
+                    border
+                    border-gray-700
+                    hover:bg-blue-800
+                    w-[200px]
+                    mx-auto
+                    font-bold
+                    mt-1
+                    
+                    '
+                    type='submit'>Postar</button>
                 </form>
             </div>
 

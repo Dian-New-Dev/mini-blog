@@ -34,11 +34,41 @@ const Post: React.FC = () => {
 
 
     return (
-        <div>
-            <h2>{params.postId}</h2>
+        <div className='
+        w-full
+        h-full
+        
+        flex
+        flex-col
+        gap-8
+        text-green-200
+        p-12
+        bg-green-950
+        border-4
+        border-double
+        border-green-200
+        
+        '>
+
+            <div id='titulo-container'>
+                <h2 className='
+                text-3xl
+                font-bold
+                '>
+                    {params.postId}</h2>
+            </div>
+
+            <div id='corpo-container' className=''>
+                <p className='
+                whitespace-pre-line	
+                leading-7
+                '>
+                    {corpo}</p>
+            </div>
+            
            
            
-           <p>{corpo}</p>
+           
         </div>
     );
 

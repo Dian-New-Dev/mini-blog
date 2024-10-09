@@ -91,5 +91,6 @@ Para resolver esse problema, as seguintes alterações foram feitas:
 
 Essas alterações garantiram que a renderização de ListaDePostagens estivesse sempre sincronizada com as alterações no estado, resultando em uma atualização imediata após a adição de novas postagens.
 
+5) CSS: flex-grow faz com que um dos items dentro de um container flex cresça o máximo possível dentro do mesmo.
 
 
