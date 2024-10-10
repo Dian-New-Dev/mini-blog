@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+interface usuarios {
+    correio: string;
+    usuario: string;
+    senha1: string;
+    senha2: string;
+    length: number;
+}
+
 const Login: React.FC = () => {
-
-    //acessar array de usuarios do localstorage na montagem
-    useEffect(() => {
-        const users = localStorage.getItem('usuarios');
-        const listaDeUsuarios = users ? JSON.parse(users) : [];
-        checarDados(listaDeUsuarios);
-    }, []);
-
-    function checarDados(listaDeUsuarios) {
-        console.log(listaDeUsuarios)
-    }
 
     //receber dados de login inputados pelo user
     const [userInput, setUserInput] = useState<string>('');
@@ -27,12 +24,57 @@ const Login: React.FC = () => {
 
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e:React.FormEvent) {
         e.preventDefault();
-        console.log(`chegamos aqui com os dados: user =${userInput}, e password=${passwordInput}`)
+        acessarDadosdoLocalStorage();
+        
+    }
+
+    //acessar dados do LocalStorage
+    const [listaDeUsuarios, setListaDeUsuarios] = useState<usuarios[]>([])
+    function acessarDadosdoLocalStorage() {
+        const users = localStorage.getItem('usuarios');
+        const lista = users ? JSON.parse(users) : [];
+        setListaDeUsuarios(lista); // Isso atualiza de forma assíncrona
+    }
+    
+    //quando listaDeUsuarios recebe os dados do localStorage,
+    // esse ufeEffect aciona e dá seguimento ao fluxo
+    useEffect(() => {
+        validarLogin();
+    }, [listaDeUsuarios]);
+
+    //com dados do localstorage e do form compilados
+    // tentar validar login
+
+    function validarLogin() {
+        if (listaDeUsuarios) {
+            for (let i = 0; i < listaDeUsuarios.length; i++) {
+
+                if (listaDeUsuarios[i].usuario === userInput) {
+                    if (listaDeUsuarios[i].senha1 === passwordInput) {
+                        console.log('encontramos um usuario com esse  nome e o password parece correto')
+                        
+                    } else {
+                        console.log('há um user mas senha incorreta')
+                        return;
+                    }
+
+                } else {
+                    console.log('nada')
+                }
+            }
+        }
+        
     }
     
     
+    
+    //checar se dados existem
+    // function checarSeDadosExistem() {
+    //     console.log(`lista de usuarios do local storage: ${listaDeUsuarios}`)
+    //     console.log(`usuario: ${userInput} e senha: ${passwordInput}`)
+    // }    
     
 
     
@@ -147,3 +189,12 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+    // //acessar array de usuarios do localstorage na montagem
+    // const [listaDeUsuarios, setListaDeUsuarios] = useState<usuarios>('')
+    // useEffect(() => {
+    //     const users = localStorage.getItem('usuarios');
+    //     const lista = users ? JSON.parse(users) : [];
+    //     setListaDeUsuarios(lista)
+    //     console.log(listaDeUsuarios)
+    // }, [userInput]);
