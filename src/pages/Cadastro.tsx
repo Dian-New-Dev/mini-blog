@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Registrar: React.FC = () => {
 
@@ -99,10 +101,17 @@ const Registrar: React.FC = () => {
         
         //salvar dados no localStorage
         localStorage.setItem("usuarios", JSON.stringify(arrayDeUsers))
-        
+        desmontarComponente()
         
         //passar para componente de transição
 
+    }
+
+    // se o cadastro foi bem sucedido, desmontar
+    // e direcionar usuario à pagina de login-pos-cadastro
+    const navigate = useNavigate();
+    function desmontarComponente() {
+        navigate("/login-pos-cadastro")
     }
 
     return (

@@ -14,6 +14,7 @@ import Root from './routes/root'
 import ErrorPage from './pages/ErrorPage'
 import NovoPost from './pages/NovoPost'
 import Post from './pages/Post'
+import LoginPosCadastro from './pages/LoginPosCadastro'
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: "/sign-up",
                 element: <Cadastro />
+            },
+            {
+                path: "/login-pos-cadastro",
+                element: <LoginPosCadastro />
             },
             {
                 path: "/novo-post",
