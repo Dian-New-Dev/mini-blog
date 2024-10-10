@@ -49,6 +49,8 @@ const Registrar: React.FC = () => {
     const [erroEmail, setErroEmail] = useState<boolean>(false);
     const [erroSenha, setErroSenha] = useState<boolean>(false);
 
+    
+
     function verificarDados(preCadastro) {
         // Inicializa as variáveis de erro locais
         let localErroEmail = false;
@@ -82,14 +84,18 @@ const Registrar: React.FC = () => {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(`o valor de erroEmail é: ${erroEmail}`)
-    //     console.log(`o valor de erroSenha é: ${erroSenha}`)
-    // }, [erroEmail, erroSenha])
+    useEffect(() => {
+        console.log(`o valor de erroEmail é: ${erroEmail}`)
+        console.log(`o valor de erroSenha é: ${erroSenha}`)
+    }, [erroEmail, erroSenha])
     
 
     function armazenarDados(preCadastro) {
-        console.log('chegou aqui, hora de armazenr os daados')
+        console.log('chegou aqui, hora de armazenr os dados')
+
+        //salvar dados no localStorage
+        
+        //passar para componente de transição
 
     }
 
@@ -118,10 +124,46 @@ const Registrar: React.FC = () => {
             gap-4
             h-fit'
             onSubmit={handleSubmit}>
-                <input onChange={handleInputEmail} className='p-2 w-full text-green-900' type="text" placeholder='E-mail' />
+                <label className={`
+                text-sm
+                leading-3
+                text-red-500
+                ${erroEmail ? 'block' : 'hidden'}`} 
+                htmlFor="email">O e-mail deve seguir o formato nome@email.com</label>
+                
+                <input className={`
+                p-2
+                w-full
+                text-green-900
+                ${erroEmail ? 'borda-de-erro' : 'border-0'}
+                `}
+                onChange={handleInputEmail}
+                name='email'
+                type="text"
+                placeholder='E-mail' />
+                
                 <input onChange={handleInputUserName} className='p-2 w-full text-green-900' type="text" placeholder='Nome de Usuário' />
+                
                 <input onChange={handleInputSenha1} className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
-                <input onChange={handleInputSenha2} className='p-2 w-full text-green-900' type="password" placeholder='Repita a Senha' />
+                
+                <label className={`
+                text-sm
+                leading-3
+                text-red-500
+                ${erroSenha ? 'block' : 'hidden'}`} 
+                htmlFor="senha2">As senhas não coincidem</label>
+                
+                <input className={`
+                p-2
+                w-full
+                text-green-900
+                ${erroSenha ? 'borda-de-erro' : 'border-0'}
+                `}
+                onChange={handleInputSenha2}
+                name='senha2'
+                
+                type="password"
+                placeholder='Repita a Senha' />
 
 
 
