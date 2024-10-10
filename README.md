@@ -26,7 +26,7 @@
 
 ## Mapeamento de problemas
 
-### Problema: como criar novo post
+### Problema: como criar novo post (resolvido)
 
 ~~- criar botao "nova postagem"
 - abrir tela padrao com inputs para titulo e texto

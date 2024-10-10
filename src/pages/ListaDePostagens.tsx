@@ -11,7 +11,6 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
     const [listaDePosts, setListaDePosts] = useState<any[]>([])
 
     useEffect(() =>{
-        console.log(`useEffect de ListaDePostages acionado, pois reRenderizar tem valor ${reRenderizar}`)
         const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
         if (arrayDePosts !== null) {
            const parsedArray = JSON.parse(arrayDePosts);

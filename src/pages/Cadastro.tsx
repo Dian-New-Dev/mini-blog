@@ -1,6 +1,98 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Registrar: React.FC = () => {
+    
+    //receber valores dos inputs via onChange
+    const [email, setEmail] = useState<string>('');
+    const [userName, setUserName] = useState<string>('');
+    const [password1, setPassword1] = useState<string>('');
+    const [password2, setPassword2] = useState<string>('');
+
+    function handleInputEmail(e:React.ChangeEvent<HTMLInputElement>) {
+        setEmail(e.target.value)
+    }
+
+    function handleInputUserName(e:React.ChangeEvent<HTMLInputElement>) {
+        setUserName(e.target.value)
+    }
+
+    function handleInputSenha1(e:React.ChangeEvent<HTMLInputElement>) {
+        setPassword1(e.target.value)
+    }
+
+    function handleInputSenha2(e:React.ChangeEvent<HTMLInputElement>) {
+        setPassword2(e.target.value)
+    }
+
+    //enviar esses valores para localStorage via onSubmit
+
+    function handleSubmit(e: React.FormEvent) {
+        //impede recarregar pagina
+        e.preventDefault();
+
+        //compila os dados em um objeto
+        const preCadastro = {
+            correio: email,
+            usuario: userName,
+            senha1: password1,
+            senha2: password2,
+        }
+
+        //loga os dados para debugging
+        console.log(preCadastro)
+
+        //verificar se dados são validos
+        verificarDados(preCadastro)
+    }
+
+    //verificao de e-mail e senha
+    const [erroEmail, setErroEmail] = useState<boolean>(false);
+    const [erroSenha, setErroSenha] = useState<boolean>(false);
+
+    function verificarDados(preCadastro) {
+        // Inicializa as variáveis de erro locais
+        let localErroEmail = false;
+        let localErroSenha = false;
+    
+        // Verificar se o email tem @
+        if (!preCadastro.correio.includes('@')) {
+            console.log('email não tem arroba');
+            localErroEmail = true;
+            setErroEmail(true);  // Atualiza o estado visual
+        } else {
+            setErroEmail(false);  // Reseta o estado visual se o email for válido
+        }
+    
+        // Verificar se as senhas são iguais
+        if (preCadastro.senha1 !== preCadastro.senha2) {
+            console.log('senhas são diferentes');
+            localErroSenha = true;
+            setErroSenha(true);  // Atualiza o estado visual
+        } else {
+            setErroSenha(false);  // Reseta o estado visual se as senhas forem iguais
+        }
+    
+        // Verifica se houve algum erro localmente
+        if (localErroEmail || localErroSenha) {
+            console.log('ao menos uma das condições falhou');
+            // Os erros já foram renderizados para o usuário corrigir
+        } else {
+            // Dados válidos, armazena no localStorage
+            armazenarDados(preCadastro);
+        }
+    }
+
+    // useEffect(() => {
+    //     console.log(`o valor de erroEmail é: ${erroEmail}`)
+    //     console.log(`o valor de erroSenha é: ${erroSenha}`)
+    // }, [erroEmail, erroSenha])
+    
+
+    function armazenarDados(preCadastro) {
+        console.log('chegou aqui, hora de armazenr os daados')
+
+    }
+
     return (
         <div className="outlet-components">
         <div className='
@@ -24,12 +116,12 @@ const Registrar: React.FC = () => {
             flex-col
             items-center
             gap-4
-            h-fit' 
-            action="#">
-                <input className='p-2 w-full text-green-900' type="text" placeholder='E-mail' />
-                <input className='p-2 w-full text-green-900' type="text" placeholder='Nome de Usuário' />
-                <input className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
-                <input className='p-2 w-full text-green-900' type="password" placeholder='Repita a Senha' />
+            h-fit'
+            onSubmit={handleSubmit}>
+                <input onChange={handleInputEmail} className='p-2 w-full text-green-900' type="text" placeholder='E-mail' />
+                <input onChange={handleInputUserName} className='p-2 w-full text-green-900' type="text" placeholder='Nome de Usuário' />
+                <input onChange={handleInputSenha1} className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
+                <input onChange={handleInputSenha2} className='p-2 w-full text-green-900' type="password" placeholder='Repita a Senha' />
 
 
 

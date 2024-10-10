@@ -148,7 +148,11 @@ const Root: React.FC = () => {
 
                 ">
                     <div id="outlet" className="
-                    flex-grow">
+                    flex
+                    flex-col
+                    flex-grow
+                    
+                    ">
                         {clicouEmLinks ?
                         <Outlet context={[reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks]} />
                         : <UltimoPost />}
