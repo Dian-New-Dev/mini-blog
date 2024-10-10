@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const Registrar: React.FC = () => {
+
+    //carregar lista de usuarios cadastrados
     
     //receber valores dos inputs via onChange
     const [email, setEmail] = useState<string>('');
@@ -45,12 +47,10 @@ const Registrar: React.FC = () => {
         verificarDados(preCadastro)
     }
 
+    
     //verificao de e-mail e senha
     const [erroEmail, setErroEmail] = useState<boolean>(false);
     const [erroSenha, setErroSenha] = useState<boolean>(false);
-
-    
-
     function verificarDados(preCadastro) {
         // Inicializa as variáveis de erro locais
         let localErroEmail = false;
@@ -73,6 +73,9 @@ const Registrar: React.FC = () => {
         } else {
             setErroSenha(false);  // Reseta o estado visual se as senhas forem iguais
         }
+
+        //futura verificação: nome de usuario ou email
+        //ja cadastrados?
     
         // Verifica se houve algum erro localmente
         if (localErroEmail || localErroSenha) {
@@ -84,16 +87,19 @@ const Registrar: React.FC = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(`o valor de erroEmail é: ${erroEmail}`)
-        console.log(`o valor de erroSenha é: ${erroSenha}`)
-    }, [erroEmail, erroSenha])
-    
-
     function armazenarDados(preCadastro) {
         console.log('chegou aqui, hora de armazenr os dados')
 
+        //converter dados em um item de array para o primeiro user
+        const arrayDeUsers = [
+            preCadastro
+        ]
+
+        //ou adicionar na lista de usuarios para users posteriores
+        
         //salvar dados no localStorage
+        localStorage.setItem("usuarios", JSON.stringify(arrayDeUsers))
+        
         
         //passar para componente de transição
 
