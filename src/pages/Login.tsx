@@ -2,12 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
-    
+
     //acessar array de usuarios do localstorage na montagem
     useEffect(() => {
         const users = localStorage.getItem('usuarios');
         const listaDeUsuarios = users ? JSON.parse(users) : [];
+        checarDados(listaDeUsuarios);
     }, []);
+
+    function checarDados(listaDeUsuarios) {
+        console.log(listaDeUsuarios)
+    }
+
+    //receber dados de login inputados pelo user
+    const [userInput, setUserInput] = useState<string>('');
+    const [passwordInput, setPasswordInput] = useState<string>('');
+    
+    function handleUserInput(e:React.ChangeEvent<HTMLInputElement>) {
+        setUserInput(e.target.value)
+    }
+
+    function handlePasswordInput(e:React.ChangeEvent<HTMLInputElement>) {
+        setPasswordInput(e.target.value)
+
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(`chegamos aqui com os dados: user =${userInput}, e password=${passwordInput}`)
+    }
+    
+    
+    
+
     
 
 
@@ -43,10 +70,25 @@ const Login: React.FC = () => {
                 items-center
                 gap-4
                 flex-grow' 
-                action="#">
+                onSubmit={handleSubmit}
+                >
+                    
+                    <input className='
+                    p-2
+                    w-full
+                    text-green-900
+                    '
+                    onChange={handleUserInput}
+                    type="text"
+                    placeholder='Usuário'/>
 
-                    <input className='p-2 w-full text-green-900' type="text" placeholder='Usuário' />
-                    <input className='p-2 w-full text-green-900' type="password" placeholder='Senha' />
+                    <input className='
+                    p-2
+                    w-full
+                    text-green-900'
+                    onChange={handlePasswordInput}
+                    type="password"
+                    placeholder='Senha' />
 
                     <div className='flex items-center w-full px-2'>
                         <div className='w-1/2 flex gap-2 items-center'>
