@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
+    
+    //acessar array de usuarios do localstorage na montagem
+    useEffect(() => {
+        const users = localStorage.getItem('usuarios');
+        const listaDeUsuarios = users ? JSON.parse(users) : [];
+    }, []);
+    
+
+
+    //checar receber dados de login
+
+    //checar se usuario existe no banco de dados
+
+    //checar se senha inputada coincide com senha no storage
+
+    //direcionar para página pessoal com params do usuario
+    
     return (
         <div className="outlet-components">
             <div className='
