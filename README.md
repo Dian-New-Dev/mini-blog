@@ -98,6 +98,12 @@ O resultado são os valores salvos no local storage persistindo remontagens.
 
 2) Em react router, há vários componentes que não estão necessariamente linkados por parentagem. Isso dificulta a transmissão de dados entre eles via props. Encontramos um contorno a esse problema com useContext, o qual permite declarar props universalmente acessíveis a qualquer componente dentro da UI tree.
 
+- criar arquivo context.tsx, declarando a variavel, tipando-a e lhe exportando junto com um provider
+
+- encapsular o App ou ReactProvider em main com o provider
+
+- importar o useContext e declarar uma variavel para receber a variavel Context no arquivo que precisar acessá-la
+
 3) o uso de context provou-se problemático e desnecessário. Usamos props passadas do root para componentes filho diretos e para rotas dentro do Outlet, usou-se método do react router nativo para passar props ao Outlet:
 
 ```
@@ -123,4 +129,27 @@ Essas alterações garantiram que a renderização de ListaDePostagens estivesse
 
 6) useNavigate (hook do react router) permite "forçar" a aplicação a acessar um link específico após determinado evento.
 
+7) params, funcionalidade do react router, permite formar links dinâmicos.
+
+## Continuidade
+
+- acabei de criar variavel context armazenando nome do usuario apos login
+
+- fazer lista de posts só aparecer se houver usuario logado
+
+- lista de posts busca array de posts com nome de usuario para renderizar
+
+- posts são armazenados em array de objetos com nome do usuario
+
+- login = lista de posts busca array de posts com nome de usuario no localstorage
+
+## Backend
+
+1) De acordo com o Co-Pilot do Windows, as melhores opções de backend para meu projeto são:
+
+- Node.JS + Express: estabelece o servidor backend, gerencia rotas e faz requisições HTTP.
+
+- Passport.js: middleware de autenticação, utilizado para cadastrar usuários e validar tentativas de login;
+
+- MongoDB: banco de dados NoSQL, para armazenar posts e imagens. É ele quem armazenará dados de autenticação. O Passport.js apenas pega esses dados e realiza a autenticação.
 
