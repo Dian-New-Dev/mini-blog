@@ -89,7 +89,9 @@ const Root: React.FC = () => {
                     font-bold"
                     onClick={linkClicado}
                     >
-                        <Link to="/novo-post">Novo Post</Link>
+                        <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
+                            Novo Post
+                        </Link>
                     </button>
 
                 </div>
