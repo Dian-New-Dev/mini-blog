@@ -11,6 +11,10 @@ interface usuarios {
 
 const Login: React.FC = () => {
 
+    const [erroSenha, setErroSenha] = useState<boolean>(false); //se senha errada
+    const [erroNome, setErroNome] = useState<boolean>(false); // se senha errada e nome não existe
+    const [loginGreenlit, setLoginGreenLit] = useState<boolean>(false) // se nenhum erro, credenciais corretas = login
+
     //receber dados de login inputados pelo user
     const [userInput, setUserInput] = useState<string>('');
     const [passwordInput, setPasswordInput] = useState<string>('');
@@ -27,6 +31,11 @@ const Login: React.FC = () => {
     function handleSubmit(e:React.FormEvent) {
         e.preventDefault();
         acessarDadosdoLocalStorage();
+
+        //resetar variaveis
+        setErroNome(false)
+        setErroSenha(false)
+        setLoginGreenLit(false)
         
     }
 
@@ -47,6 +56,7 @@ const Login: React.FC = () => {
     //com dados do localstorage e do form compilados
     // tentar validar login
 
+
     function validarLogin() {
         if (listaDeUsuarios) {
             for (let i = 0; i < listaDeUsuarios.length; i++) {
@@ -54,19 +64,28 @@ const Login: React.FC = () => {
                 if (listaDeUsuarios[i].usuario === userInput) {
                     if (listaDeUsuarios[i].senha1 === passwordInput) {
                         console.log('encontramos um usuario com esse  nome e o password parece correto')
-                        
+                        setLoginGreenLit(true)
+                        break;
                     } else {
                         console.log('há um user mas senha incorreta')
-                        return;
+                        setErroSenha(true)
+                        return
                     }
 
                 } else {
-                    console.log('nada')
+                    console.log('não achou nome')
+                    setErroNome(true)
                 }
             }
         }
         
     }
+
+    useEffect(() => {
+        if (loginGreenlit) {
+            //direcionar usuario para pagina pessoal
+        }
+    },[loginGreenlit] )
     
     
     
@@ -87,7 +106,7 @@ const Login: React.FC = () => {
     //checar se senha inputada coincide com senha no storage
 
     //direcionar para página pessoal com params do usuario
-    
+
     return (
         <div className="outlet-components">
             <div className='
@@ -114,20 +133,43 @@ const Login: React.FC = () => {
                 flex-grow' 
                 onSubmit={handleSubmit}
                 >
+
+                    <p className={`
+                    text-sm
+                    text-red-500
+                    text-center
+                    leading-3
+                    ${erroSenha && !erroNome ? 'block' : 'hidden'}
+                    `}>
+                        Nome de usuário e senha não coincidem.</p>
                     
-                    <input className='
+                    <p className={`
+                    text-sm
+                    text-red-500
+                    text-center
+                    leading-3
+                    ${erroNome ? 'block' : 'hidden'}
+                    `}>
+                        Nome de usuário não existe.</p>
+
+                    <input className={`
                     p-2
                     w-full
                     text-green-900
-                    '
+                    ${erroNome && !erroSenha ? 'borda-de-erro' : 'border-0'}
+                    
+                    `}
                     onChange={handleUserInput}
                     type="text"
                     placeholder='Usuário'/>
 
-                    <input className='
+                    <input className={`
                     p-2
                     w-full
-                    text-green-900'
+                    text-green-900
+                    ${erroSenha ? 'borda-de-erro' : 'border-0'}
+                    
+                    `}
                     onChange={handlePasswordInput}
                     type="password"
                     placeholder='Senha' />
@@ -151,7 +193,8 @@ const Login: React.FC = () => {
                     font-bold
                     text-green-100
                     hover:bg-green-900'
-                    type='submit'>
+                    type='submit'
+                    >
                         Entrar
                     </button>
                 
