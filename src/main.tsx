@@ -17,6 +17,7 @@ import Post from './pages/Post'
 import LoginPosCadastro from './pages/LoginPosCadastro'
 
 import { LoginContextProvider } from './context/loginContext'
+import PaginaPessoal from './pages/PaginaPessoal'
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
             {
                 path: '/post/:postId',
                 element: <Post />
-            }
+            },
+            {
+                path: '/pagina-pessoal',
+                element: <PaginaPessoal />
+            },
         ]
     },   
 ]);
