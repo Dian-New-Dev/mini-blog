@@ -4,7 +4,16 @@ import { Outlet, Link } from "react-router-dom";
 import ListaDePostagens from "../pages/ListaDePostagens";
 import UltimoPost from "../pages/UltimoPost";
 
+import { useContext } from "react";
+import { LoginContext } from "../context/loginContext";
+
 const Root: React.FC = () => {
+
+    const loginCtxt = useContext(LoginContext)
+
+    useEffect(() => {
+        console.log(`site on, está o usuario logado? ${loginCtxt?.isUserLoggedIn} `)
+    }, [loginCtxt])
 
     //controlar atualizacao da lista de postagens
     const [reRenderizar, setReRenderizar] = useState<number>(0);

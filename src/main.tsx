@@ -16,6 +16,8 @@ import NovoPost from './pages/NovoPost'
 import Post from './pages/Post'
 import LoginPosCadastro from './pages/LoginPosCadastro'
 
+import { LoginContextProvider } from './context/loginContext'
+
 const router = createBrowserRouter([
     {
         //elemento root route, o resto renderiza dentro dele
@@ -50,6 +52,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <RouterProvider router ={router} />
+        <LoginContextProvider>
+            <RouterProvider router ={router} />
+        </LoginContextProvider>
     </StrictMode>,
 )
