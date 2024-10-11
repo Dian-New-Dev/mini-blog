@@ -47,7 +47,7 @@ const router = createBrowserRouter([
                 element: <Post />
             },
             {
-                path: '/pagina-pessoal',
+                path: '/my-page/:id',
                 element: <PaginaPessoal />
             },
         ]

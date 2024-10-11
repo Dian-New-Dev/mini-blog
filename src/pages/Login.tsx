@@ -91,7 +91,7 @@ const Login: React.FC = () => {
     useEffect(() => {
         if (loginGreenlit) {
             loginCtxt?.setIsUserLoggedIn(true)
-            navigate('/pagina-pessoal');
+            navigate(`/my-page/${userInput}`);
         }
     },[loginGreenlit, navigate] )  
 

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
 
 const PaginaPessoal: React.FC = () => {
+
+    const { id } = useParams();
 
     const loginCtxt = useContext(LoginContext)
     const navigate = useNavigate();
@@ -24,7 +26,7 @@ const PaginaPessoal: React.FC = () => {
     }
 
     return (
-        <h1>Olá, esta é sua página pessoal</h1>
+        <h1>Olá, esta é sua página pessoal, {id}</h1>
     )
 
 };
