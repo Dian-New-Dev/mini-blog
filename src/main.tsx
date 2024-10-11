@@ -18,6 +18,7 @@ import LoginPosCadastro from './pages/LoginPosCadastro'
 
 import { LoginContextProvider } from './context/loginContext'
 import PaginaPessoal from './pages/PaginaPessoal'
+import { UserNameContextProvider } from './context/userNameContext'
 
 const router = createBrowserRouter([
     {
@@ -58,7 +59,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <LoginContextProvider>
-            <RouterProvider router ={router} />
+            <UserNameContextProvider>
+                <RouterProvider router ={router} />
+            </UserNameContextProvider>
         </LoginContextProvider>
     </StrictMode>,
 )

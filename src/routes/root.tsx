@@ -6,6 +6,7 @@ import UltimoPost from "../pages/UltimoPost";
 
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
+import MiniPerfil from "../pages/MiniPerfil";
 
 const Root: React.FC = () => {
 
@@ -96,13 +97,19 @@ const Root: React.FC = () => {
 
                 </div>
 
-                
+                <div id="perfil-container" className={`
+                ${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}
+                `}
+                >
 
-                    <nav className="">
-                        <ul>
-                            {<ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
-                        </ul>
-                    </nav>
+                    <MiniPerfil />  
+                </div>
+
+                <nav className="">
+                    <ul>
+                        {<ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
+                    </ul>
+                </nav>
             </div>
 
             <div className="

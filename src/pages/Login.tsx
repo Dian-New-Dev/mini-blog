@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
+import { UserNameContext } from '../context/userNameContext';
 
 interface usuarios {
     correio: string;
@@ -87,11 +88,12 @@ const Login: React.FC = () => {
 
     //se deu tudo certo, direcionar usuario para pagina pessoal
     const loginCtxt = useContext(LoginContext)
-    
+    const userCtxt = useContext(UserNameContext)
     useEffect(() => {
         if (loginGreenlit) {
             loginCtxt?.setIsUserLoggedIn(true)
             navigate(`/my-page/${userInput}`);
+            userCtxt?.setUserNameCtx(userInput)
         }
     },[loginGreenlit, navigate] )  
 
