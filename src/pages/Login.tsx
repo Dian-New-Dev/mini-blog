@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useContext } from "react";
+import { LoginContext } from "../context/loginContext";
 
 interface usuarios {
     correio: string;
@@ -10,6 +13,9 @@ interface usuarios {
 }
 
 const Login: React.FC = () => {
+
+    //para levar o usuario a pagina pessoal se login OK
+    const navigate = useNavigate();
 
     const [erroSenha, setErroSenha] = useState<boolean>(false); //se senha errada
     const [erroNome, setErroNome] = useState<boolean>(false); // se senha errada e nome não existe
@@ -55,8 +61,6 @@ const Login: React.FC = () => {
 
     //com dados do localstorage e do form compilados
     // tentar validar login
-
-
     function validarLogin() {
         if (listaDeUsuarios) {
             for (let i = 0; i < listaDeUsuarios.length; i++) {
@@ -81,31 +85,15 @@ const Login: React.FC = () => {
         
     }
 
+    //se deu tudo certo, direcionar usuario para pagina pessoal
+    const loginCtxt = useContext(LoginContext)
+    
     useEffect(() => {
         if (loginGreenlit) {
-            //direcionar usuario para pagina pessoal
+            loginCtxt?.setIsUserLoggedIn(true)
+            navigate('/pagina-pessoal');
         }
-    },[loginGreenlit] )
-    
-    
-    
-    //checar se dados existem
-    // function checarSeDadosExistem() {
-    //     console.log(`lista de usuarios do local storage: ${listaDeUsuarios}`)
-    //     console.log(`usuario: ${userInput} e senha: ${passwordInput}`)
-    // }    
-    
-
-    
-
-
-    //checar receber dados de login
-
-    //checar se usuario existe no banco de dados
-
-    //checar se senha inputada coincide com senha no storage
-
-    //direcionar para página pessoal com params do usuario
+    },[loginGreenlit, navigate] )  
 
     return (
         <div className="outlet-components">
@@ -232,12 +220,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-    // //acessar array de usuarios do localstorage na montagem
-    // const [listaDeUsuarios, setListaDeUsuarios] = useState<usuarios>('')
-    // useEffect(() => {
-    //     const users = localStorage.getItem('usuarios');
-    //     const lista = users ? JSON.parse(users) : [];
-    //     setListaDeUsuarios(lista)
-    //     console.log(listaDeUsuarios)
-    // }, [userInput]);
