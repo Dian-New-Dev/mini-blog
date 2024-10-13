@@ -27,16 +27,18 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
 
     useEffect(() =>{
         const arrayDePosts = localStorage.getItem(nomeDoUsuario)
+        console.log(nomeDoUsuario)
         if (arrayDePosts !== null) {
            const parsedArray = JSON.parse(arrayDePosts);
            setListaDePosts(parsedArray)
            setSemPosts(false)
         } else {
             setSemPosts(true)
+            console.log('parece que não há posts')
         }
 
        
-    }, [reRenderizar])
+    }, [nomeDoUsuario])
 
     function linkClicado() {
         setClicouEmLinks(true)
