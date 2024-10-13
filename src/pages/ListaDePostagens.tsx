@@ -19,7 +19,7 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
         if (userCtxt?.userNameCtx) {
             setNomeDoUsuario(userCtxt?.userNameCtx)
         }
-    })
+    }, [])
 
     //verificar se há array de posts do usuario
     const [listaDePosts, setListaDePosts] = useState<any[]>([])

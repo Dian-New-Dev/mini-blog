@@ -18,7 +18,7 @@ const NovoPost: React.FC = () => {
         if (userCtxt?.userNameCtx) {
             setNomeDoUsuario(userCtxt?.userNameCtx)
         }
-    })
+    }, [])
 
     const navigate = useNavigate();
 
