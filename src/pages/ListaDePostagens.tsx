@@ -75,7 +75,7 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                     listaDePosts.map((item, index) => (
                     <li key={index} className='hover:underline hover:scale-105 hover:text-green-300'>
                         <NavLink onClick={linkClicado} to={`/post/${item.titulo}`}>
-                        {item.titulo}
+                            {item.titulo}
                         </NavLink>
                     </li>
                     ))

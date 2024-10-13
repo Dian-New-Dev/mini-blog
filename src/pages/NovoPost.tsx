@@ -1,5 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
+
+import { UserNameContext } from '../context/userNameContext';
 
 interface arrayDeObjetosOG { //para tipagem de array de objetos
     titulo: string;
@@ -7,6 +9,16 @@ interface arrayDeObjetosOG { //para tipagem de array de objetos
 }
 
 const NovoPost: React.FC = () => {
+
+    //pegar nome do usuario
+    const userCtxt = useContext(UserNameContext)
+    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
+
+    useEffect(() => {
+        if (userCtxt?.userNameCtx) {
+            setNomeDoUsuario(userCtxt?.userNameCtx)
+        }
+    })
 
     const navigate = useNavigate();
 
@@ -33,7 +45,8 @@ const NovoPost: React.FC = () => {
         setArrayDeObjetosOG(updatedArray);
     
         // Atualiza o localStorage com os novos dados
-        localStorage.setItem("arrayDeObjetosOG", JSON.stringify(updatedArray));
+        //nome do array é o nome do usuario
+        localStorage.setItem(nomeDoUsuario, JSON.stringify(updatedArray));
     
         // Atualiza o estado que deve acionar a re-renderização
         setReRenderizar(prev => prev + 1);
@@ -46,7 +59,7 @@ const NovoPost: React.FC = () => {
 
     useEffect(() => {
         // Carregar dados do localStorage ao montar o componente
-        const savedPosts = localStorage.getItem('arrayDeObjetosOG');
+        const savedPosts = localStorage.getItem(nomeDoUsuario);
         if (savedPosts) {
             const posts = JSON.parse(savedPosts);
             setArrayDeObjetosOG(posts);
