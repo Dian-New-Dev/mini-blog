@@ -10,16 +10,6 @@ interface arrayDeObjetosOG { //para tipagem de array de objetos
 
 const NovoPost: React.FC = () => {
 
-    //pegar nome do usuario
-    const userCtxt = useContext(UserNameContext)
-    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
-
-    useEffect(() => {
-        if (userCtxt?.userNameCtx) {
-            setNomeDoUsuario(userCtxt?.userNameCtx)
-        }
-    }, [])
-
     const navigate = useNavigate();
 
     const [reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks] = useOutletContext();
@@ -35,6 +25,22 @@ const NovoPost: React.FC = () => {
     function handleInputBody(e:React.ChangeEvent<HTMLInputElement>) {
         setItemBody(e.target.value)
     }
+    
+    //
+
+    //pegar nome do usuario
+    const userCtxt = useContext(UserNameContext)
+    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
+
+    useEffect(() => {
+        if (userCtxt?.userNameCtx) {
+            setNomeDoUsuario(userCtxt?.userNameCtx)
+            console.log(nomeDoUsuario)
+        }
+    }, [])
+
+        
+    //
     
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -60,21 +66,23 @@ const NovoPost: React.FC = () => {
     useEffect(() => {
         // Carregar dados do localStorage ao montar o componente
         const savedPosts = localStorage.getItem(nomeDoUsuario);
+        console.log(savedPosts)
         if (savedPosts) {
             const posts = JSON.parse(savedPosts);
             setArrayDeObjetosOG(posts);
             // Atualiza o reRenderizar aqui para refletir a mudança
             setReRenderizar(prev => prev + 1); // Para garantir que o estado atualize
         }
-    }, []);
+    }, [nomeDoUsuario]);
     
 
     useEffect(() => {
         if (arrayDeObjetosOG.length > 0) { //sem esse if, o useEffect resetaria o localstorage a cada montagem
-            console.log(arrayDeObjetosOG)
-            localStorage.setItem("arrayDeObjetosOG", JSON.stringify(arrayDeObjetosOG));
+            localStorage.setItem(nomeDoUsuario, JSON.stringify(arrayDeObjetosOG));
         }
-    }, [arrayDeObjetosOG])
+    }, [arrayDeObjetosOG]) // essa dependencia tem de estar aqui
+    //par que este useEffect ocorra logo após o nome de usuario
+    //ser captado e consiga add ao array ao inves de criar um novo
 
     return (
         <div 
