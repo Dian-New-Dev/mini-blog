@@ -133,15 +133,13 @@ Essas alterações garantiram que a renderização de ListaDePostagens estivesse
 
 ## Continuidade
 
-- acabei de criar variavel context armazenando nome do usuario apos login
+- posts agora sao linkados a usuarios
 
-- fazer lista de posts só aparecer se houver usuario logado
+- lista de posts so aparece se houver usuario logado e se usuario ja fez algum post
 
-- lista de posts busca array de posts com nome de usuario para renderizar
+- oferecer link para usuario deslogar
 
-- posts são armazenados em array de objetos com nome do usuario
-
-- login = lista de posts busca array de posts com nome de usuario no localstorage
+- oferecer forma do usuario editar e/ou deletar posts
 
 ## Backend
 
