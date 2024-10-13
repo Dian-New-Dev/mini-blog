@@ -107,7 +107,7 @@ const Root: React.FC = () => {
 
                 <nav className="">
                     <ul>
-                        {<ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
+                        {loginCtxt?.isUserLoggedIn && <ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
                     </ul>
                 </nav>
             </div>
