@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { UserNameContext } from '../context/userNameContext';
+
 
 interface ListaDePostagensProps {
     reRenderizar: number;
@@ -8,13 +11,28 @@ interface ListaDePostagensProps {
 
 const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
 
+    //pegar nome do usuario
+    const userCtxt = useContext(UserNameContext)
+    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
+
+    useEffect(() => {
+        if (userCtxt?.userNameCtx) {
+            setNomeDoUsuario(userCtxt?.userNameCtx)
+        }
+    })
+
+    //verificar se há array de posts do usuario
     const [listaDePosts, setListaDePosts] = useState<any[]>([])
+    const [semPosts, setSemPosts] = useState<bolean>(true)
 
     useEffect(() =>{
-        const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
+        const arrayDePosts = localStorage.getItem(nomeDoUsuario)
         if (arrayDePosts !== null) {
            const parsedArray = JSON.parse(arrayDePosts);
            setListaDePosts(parsedArray)
+           setSemPosts(false)
+        } else {
+            setSemPosts(true)
         }
 
        
@@ -50,26 +68,18 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                     Ordenadas desordens mentais</p>
             </div>
 
-            <ul className='
-            p-4
-            px-8
-            flex
-            flex-col
-            gap-2
-            list-disc
-            '>
-                {listaDePosts.map((item, index) => (
-                    <li key={index} 
-                    className={`
-                    hover:underline
-                    hover:scale-105
-                    hover:text-green-300
-                    `}>
+            <ul className='p-4 px-8 flex flex-col gap-2 list-disc'>
+                {semPosts ? (
+                    'Sem posts por enquanto. Quel tal começar a postar?'
+                ) : (
+                    listaDePosts.map((item, index) => (
+                    <li key={index} className='hover:underline hover:scale-105 hover:text-green-300'>
                         <NavLink onClick={linkClicado} to={`/post/${item.titulo}`}>
-                            {item.titulo}
+                        {item.titulo}
                         </NavLink>
                     </li>
-                ))}
+                    ))
+                )}
             </ul>
 
 
@@ -79,47 +89,3 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
 };
 
 export default ListaDePostagens;
-
-// import React, { useEffect, useState } from 'react';
-
-// interface ListaDePostagensProps {
-//     reRenderizar: number;
-// }
-
-// const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar }) => {
-
-//     const [listaDePosts, setListaDePosts] = useState<any[]>([])
-
-//     useEffect(() =>{
-//         console.log(`useEffect de ListaDePostages acionado, pois reRenderizar tem valor ${reRenderizar}`)
-//         const arrayDePosts = localStorage.getItem("arrayDeObjetosOG")
-//         if (arrayDePosts !== null) {
-//             mapearPosts(arrayDePosts)
-//         }
-
-       
-//     }, [reRenderizar])
-
-//     function mapearPosts(array) {
-//         const parsedArray = JSON.parse(array);
-//         console.log(parsedArray[0]);
-
-//         const lista = parsedArray.map((item, index) => (
-//             <div key={index} className={``}>
-//                 {item.titulo}
-//             </div>
-//         ));
-//         setListaDePosts(lista)
-
-//         }
-
-    
-//     return (
-//         <div>
-//             {listaDePosts}
-//         </div>
-        
-//     );
-// };
-
-// export default ListaDePostagens;
