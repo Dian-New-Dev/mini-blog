@@ -10,10 +10,12 @@
 1) Componentes nestados - feito;
 2) Layouts nestados - feito;
 3) Pagina inicial, pagina de login e postagens - feito;
-4) Capacidade de criar novo post;
-5) Navbar atualiza-se a cada novo post;
-6) Cadastro de usuario e senha;
+4) Capacidade de criar novo post - feito;
+5) Navbar atualiza-se a cada novo post - feito;
+6) Cadastro de usuario e senha - feito;
 7) Cadastrar e-mail envia e-mail para o usuário;
+8) Passar logica de autenticação e user generated data para backend;
+9) Passar lógica de armazenamento de dados para backend;
 
 
 ## Tech stack:
