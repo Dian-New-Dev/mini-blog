@@ -1,12 +1,12 @@
-// server.js: Configura e inicia o servidor Express para gerenciar 
-// requisições HTTP. Serve como ponto de entrada 
-// principal para o backend da aplicação.
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
-const express = require('express')
-const app = express()
+app.use(cors());
 
 app.get("/api", (req, res) => {
-    res.json({"users" : ["userOne", "UserTwo", "userThree"] })
-})
+    console.log("API endpoint hit");
+    res.json({ "users": ["userOne", "UserTwo", "userThree"] });
+});
 
-app.listen(5000, () => (console.log('server started on port 5000')))
+app.listen(5000, () => (console.log('server started on port 5000')));

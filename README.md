@@ -153,3 +153,25 @@ Essas alterações garantiram que a renderização de ListaDePostagens estivesse
 
 - MongoDB: banco de dados NoSQL, para armazenar posts e imagens. É ele quem armazenará dados de autenticação. O Passport.js apenas pega esses dados e realiza a autenticação.
 
+## Aprendizado backend:
+
+- server.js costuma ser a API, o ponto de entrada por onde o ambiente backend começa
+
+- estava com um problema onde o frontend não conseguir pegar (fetch) os dados do backend. A solução foi trocar a url do fetch, de "/api" para o link direto "http://localhost:5000".
+
+Isso gerou um problema de CORS policy, resolvido com
+
+```
+npm install cors
+```
+
+para instalar a bibliteca CORS, bem como sua importação no server.js:
+
+```
+const express = require('express');
+const cors = require('cors'); // Importa a biblioteca cors
+const app = express();
+
+app.use(cors());
+```
+
