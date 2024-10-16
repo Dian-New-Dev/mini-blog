@@ -56,6 +56,7 @@ const Registrar: React.FC = () => {
             if(response.ok) {
                 const result = await response.json();
                 console.log('Usuario cadastrado com sucesso:', result)
+                desmontarComponente();
             } else {
                 console.error('Deu ruim no cadastro', response.statusText)
             }

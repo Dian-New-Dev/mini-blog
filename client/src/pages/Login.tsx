@@ -37,9 +37,13 @@ const Login: React.FC = () => {
 
     function handleSubmit(e:React.FormEvent) {
         e.preventDefault();
-        acessarDadosdoLocalStorage();
+        
 
-        //resetar variaveis
+
+        //logica anterior:
+        // acessarDadosdoLocalStorage();
+
+        //resetar variaveis de erro
         setErroNome(false)
         setErroSenha(false)
         setLoginGreenLit(false)
