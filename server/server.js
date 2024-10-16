@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 
 app.get("/api", (req, res) => {
-    req.json({"users" : ["userOne", "UserTwo", "userThree"] })
+    res.json({"users" : ["userOne", "UserTwo", "userThree"] })
 })
 
 app.listen(5000, () => (console.log('server started on port 5000')))
