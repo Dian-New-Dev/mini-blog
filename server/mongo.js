@@ -17,9 +17,12 @@ async function connectToDatabase() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    
+    return client.db("mini-blog").collection("usuarios"); // Substitua "seuBancoDeDados" pelo nome do seu banco de dados
+  
+  } catch (error) {
+    console.error('Erro ao conectar ao MongoDB:', error);
+    throw error; // Lança o erro para ser tratado no servidor
   }
 }
 //run().catch(console.dir);

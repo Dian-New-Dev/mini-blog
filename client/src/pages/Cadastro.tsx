@@ -30,11 +30,12 @@ const Registrar: React.FC = () => {
 
     //enviar esses valores para localStorage via onSubmit
 
-    function handleSubmit(e: React.FormEvent) {
+    const handleSubmit = async (e: React.FormEvent) => {
         //impede recarregar pagina
         e.preventDefault();
 
         //compila os dados em um objeto
+        console.log(email , userName , password1 , password2);
         const preCadastro = {
             correio: email,
             usuario: userName,
@@ -42,70 +43,88 @@ const Registrar: React.FC = () => {
             senha2: password2,
         }
 
-        //loga os dados para debugging
-        console.log(preCadastro)
+        //manda o objeto com os dados para o mongoDB
+        try {
+            const response = await fetch("http://localhost:5000/api/register", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(preCadastro),
+            });
+            
+            if(response.ok) {
+                const result = await response.json();
+                console.log('Usuario cadastrado com sucesso:', result)
+            } else {
+                console.error('Deu ruim no cadastro', response.statusText)
+            }
+
+        } catch (error) {
+            console.error('erro ao enviar dados:', error)
+        }
 
         //verificar se dados são validos
-        verificarDados(preCadastro)
-    }
+        //verificarDados(preCadastro)
+    };
 
     
     //verificao de e-mail e senha
     const [erroEmail, setErroEmail] = useState<boolean>(false);
     const [erroSenha, setErroSenha] = useState<boolean>(false);
-    function verificarDados(preCadastro) {
-        // Inicializa as variáveis de erro locais
-        let localErroEmail = false;
-        let localErroSenha = false;
+    // function verificarDados(preCadastro) {
+    //     // Inicializa as variáveis de erro locais
+    //     let localErroEmail = false;
+    //     let localErroSenha = false;
     
-        // Verificar se o email tem @
-        if (!preCadastro.correio.includes('@')) {
-            console.log('email não tem arroba');
-            localErroEmail = true;
-            setErroEmail(true);  // Atualiza o estado visual
-        } else {
-            setErroEmail(false);  // Reseta o estado visual se o email for válido
-        }
+    //     // Verificar se o email tem @
+    //     if (!preCadastro.correio.includes('@')) {
+    //         console.log('email não tem arroba');
+    //         localErroEmail = true;
+    //         setErroEmail(true);  // Atualiza o estado visual
+    //     } else {
+    //         setErroEmail(false);  // Reseta o estado visual se o email for válido
+    //     }
     
-        // Verificar se as senhas são iguais
-        if (preCadastro.senha1 !== preCadastro.senha2) {
-            console.log('senhas são diferentes');
-            localErroSenha = true;
-            setErroSenha(true);  // Atualiza o estado visual
-        } else {
-            setErroSenha(false);  // Reseta o estado visual se as senhas forem iguais
-        }
+    //     // Verificar se as senhas são iguais
+    //     if (preCadastro.senha1 !== preCadastro.senha2) {
+    //         console.log('senhas são diferentes');
+    //         localErroSenha = true;
+    //         setErroSenha(true);  // Atualiza o estado visual
+    //     } else {
+    //         setErroSenha(false);  // Reseta o estado visual se as senhas forem iguais
+    //     }
 
-        //futura verificação: nome de usuario ou email
-        //ja cadastrados?
+    //     //futura verificação: nome de usuario ou email
+    //     //ja cadastrados?
     
-        // Verifica se houve algum erro localmente
-        if (localErroEmail || localErroSenha) {
-            console.log('ao menos uma das condições falhou');
-            // Os erros já foram renderizados para o usuário corrigir
-        } else {
-            // Dados válidos, armazena no localStorage
-            armazenarDados(preCadastro);
-        }
-    }
+    //     // Verifica se houve algum erro localmente
+    //     if (localErroEmail || localErroSenha) {
+    //         console.log('ao menos uma das condições falhou');
+    //         // Os erros já foram renderizados para o usuário corrigir
+    //     } else {
+    //         // Dados válidos, armazena no localStorage
+    //         armazenarDados(preCadastro);
+    //     }
+    // }
 
-    function armazenarDados(preCadastro) {
-        console.log('chegou aqui, hora de armazenr os dados')
+    // function armazenarDados(preCadastro) {
+    //     console.log('chegou aqui, hora de armazenr os dados')
 
-        //converter dados em um item de array para o primeiro user
-        const arrayDeUsers = [
-            preCadastro
-        ]
+    //     //converter dados em um item de array para o primeiro user
+    //     const arrayDeUsers = [
+    //         preCadastro
+    //     ]
 
-        //ou adicionar na lista de usuarios para users posteriores
+    //     //ou adicionar na lista de usuarios para users posteriores
         
-        //salvar dados no localStorage
-        localStorage.setItem("usuarios", JSON.stringify(arrayDeUsers))
-        desmontarComponente()
+    //     //salvar dados no localStorage
+    //     localStorage.setItem("usuarios", JSON.stringify(arrayDeUsers))
+    //     desmontarComponente()
         
-        //passar para componente de transição
+    //     //passar para componente de transição
 
-    }
+    // }
 
     // se o cadastro foi bem sucedido, desmontar
     // e direcionar usuario à pagina de login-pos-cadastro
