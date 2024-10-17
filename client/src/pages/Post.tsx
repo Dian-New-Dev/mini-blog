@@ -28,28 +28,45 @@ const Post: React.FC = () => {
     const [arrayRecuperado, setArrayRecuparedo] = useState<arrayRecuperado[]>([]);
     const [corpo, setCorpo] = useState<string>('');
 
-    
+    // Carregar dados da coleção mongo/posts ao montar o componente
     useEffect(() => {
-        // Carregar dados do localStorage ao montar o componente
-        const savedPosts = localStorage.getItem(nomeDoUsuario);
-        if (savedPosts) {
-            const posts = JSON.parse(savedPosts);
-            setArrayRecuparedo(posts);
-            
-            montarPost(posts);
-            console.log('chegamos e chamamos')
+        console.log('titulo:' + params.postId)
+        if (nomeDoUsuario && params.postId) {
+            const titulo = params.postId;
+            console.log(titulo)
+            fetch(`http://localhost:5000/api/singlePost?username=${nomeDoUsuario}&title=${titulo}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setCorpo(data);
+            })
+            .catch(err => console.error('Erro pegando dados do post', err));
         }
+        
+
+        // const savedPosts = localStorage.getItem(nomeDoUsuario);
+        // if (savedPosts) {
+        //     const posts = JSON.parse(savedPosts);
+        //     setArrayRecuparedo(posts);
+            
+        //     montarPost(posts);
+        //     console.log('chegamos e chamamos')
+        // }
     }, [nomeDoUsuario])
 
-    function montarPost(posts) {
-        console.log(posts)
-        for (let i = 0; i < posts.length; i++) {
-            if (posts[i].titulo === params.postId) {
-                setCorpo(posts[i].corpo)
-            }
-        }
-        console.log(posts[0].titulo)
-    }
+    // function montarPost(posts) {
+    //     console.log(posts)
+    //     for (let i = 0; i < posts.length; i++) {
+    //         if (posts[i].titulo === params.postId) {
+    //             setCorpo(posts[i].corpo)
+    //         }
+    //     }
+    //     console.log(posts[0].titulo)
+    // }
 
 
     return (

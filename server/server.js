@@ -84,7 +84,7 @@ connectToPostsCollection().then((collection) => {
         }
     });
 
-    //rota para compilar postagens do usuario logado
+    //rota para compilar postagens do usuario logado / ListaDePostagens
     app.get('/api/posts', async(req, res) => {
         const username = req.query.username;
         console.log('o nome do usuario para pegar posts é:' + username)
@@ -92,6 +92,16 @@ connectToPostsCollection().then((collection) => {
         const posts = await postsCollection.find({}).toArray(); // Obtém todos os posts
         const filteredPosts = posts.filter(post => post.user === username)
         res.json(filteredPosts)
+    })
+
+    //rota para pegar o post selecionado / Post.tsx
+    app.get('/api/singlePost', async(req, res) => {
+        const username = req.query.username;
+        const title = req.query.title;
+        console.log('chegou aqui os dados para requisição:')
+        console.log(username)
+        console.log(title)
+        res.json({ "users": ["userOne", "UserTwo", "userThree"] });
     })
 
 }).catch((error) => {
