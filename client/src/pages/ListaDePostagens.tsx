@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useListaDePostagens } from '../hooks/useListaDePostagens';
@@ -10,9 +10,14 @@ interface ListaDePostagensProps {
 }
 
 const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
-
-    const { listaDePosts, semPosts } = useListaDePostagens();
+    useEffect(() => {
+            console.log('o valor de rerenderizar no filho é ' + reRenderizar)
+            
+        }, [reRenderizar])
     
+    
+    const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
+
     
     function linkClicado() {
         setClicouEmLinks(true)
@@ -41,10 +46,10 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                 leading-4
                 
                 '>
-                    Ordenadas desordens mentais</p>
+                    Ordenadas desordens mentais {reRenderizar}</p>
             </div>
 
-            <ul className='p-4 px-8 flex flex-col gap-2 list-disc'>
+            {<ul className='p-4 px-8 flex flex-col gap-2 list-disc'>
                 {semPosts ? (
                     'Sem posts por enquanto. Quel tal começar a postar?'
                 ) : (
@@ -56,11 +61,10 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                     </li>
                     ))
                 )}
-            </ul>
+            </ul>}
 
 
-        </div>
-        
+        </div>        
     );
 };
 

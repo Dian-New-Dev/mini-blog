@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserNameContext } from "../context/userNameContext";
 
-export const useListaDePostagens = () => {
+export const useListaDePostagens = (reRenderizar: number) => {
     const userCtxt = useContext(UserNameContext);
     const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('');
     const [listaDePosts, setListaDePosts] = useState<any[]>([]);
@@ -27,7 +27,7 @@ export const useListaDePostagens = () => {
                 })
                 .catch((err) => console.error('Error fetching data:', err));
         }
-    }, [nomeDoUsuario]);
+    }, [nomeDoUsuario, reRenderizar]);
 
     useEffect(() => {
         setSemPosts(listaDePosts.length === 0);

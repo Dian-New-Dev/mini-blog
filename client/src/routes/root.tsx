@@ -20,8 +20,15 @@ const Root: React.FC = () => {
 
     //controlar atualizacao da lista de postagens
     const [reRenderizar, setReRenderizar] = useState<number>(0);
+    let forceRerender = 0;
     useEffect(() => {
+        console.log('o valor de rerenderizar no pai é ' + reRenderizar)
+        console.log('o valor de forcererender no pai é ' + forceRerender)
+        forceRerender++
     }, [reRenderizar])
+
+    
+
 
     //controlar renderização condicional de UltimoPost / Outlet
     const [clicouEmLinks, setClicouEmLinks] = useState<boolean>(false)
