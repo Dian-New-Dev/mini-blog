@@ -23,22 +23,34 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
 
     //verificar se há array de posts do usuario
     const [listaDePosts, setListaDePosts] = useState<any[]>([])
-    const [semPosts, setSemPosts] = useState<bolean>(true)
+    const [semPosts, setSemPosts] = useState<boolean>(true)
 
-    useEffect(() =>{
-        const arrayDePosts = localStorage.getItem(nomeDoUsuario)
-        console.log(nomeDoUsuario)
-        if (arrayDePosts !== null) {
-           const parsedArray = JSON.parse(arrayDePosts);
-           setListaDePosts(parsedArray)
+    useEffect(() => {
+        console.log(nomeDoUsuario); // Verifique se o nome do usuário está correto
+        if (nomeDoUsuario) { // Verifique se o nome do usuário não está vazio
+            fetch(`http://localhost:5000/api/posts?username=${nomeDoUsuario}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setListaDePosts(data);
+                })
+                .catch(err => console.error('Error fetching data:', err));
+        }
+    }, [nomeDoUsuario]);
+
+    useEffect(() => {
+        if (listaDePosts !== null) {
+            console.log('este usuario tem posts')
            setSemPosts(false)
         } else {
+            console.log('este usuario não tem posts')
             setSemPosts(true)
-            console.log('parece que não há posts')
         }
-
-       
-    }, [nomeDoUsuario])
+    }, [listaDePosts])
 
     function linkClicado() {
         setClicouEmLinks(true)

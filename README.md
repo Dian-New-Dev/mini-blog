@@ -175,3 +175,5 @@ const app = express();
 app.use(cors());
 ```
 
+- Problema: O erro TypeError: postsCollection.filter is not a function ocorreu porque a variável postsCollection não era um array, resultando na falha ao tentar aplicar o método filter para filtrar postagens por usuário.
+Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse um array, utilizando await postsCollection.find({}).toArray() para obter todos os posts do banco de dados. Assim, foi possível aplicar o método filter corretamente para filtrar as postagens com base no nome do usuário.

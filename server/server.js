@@ -68,9 +68,9 @@ connectToUsersCollection().then((collection) => {
 });
 
 connectToPostsCollection().then((collection) => {
-    postsCollection = collection // armzena na varivel golbal
+    const postsCollection = collection // armzena na varivel golbal
 
-    // Rota para registro
+    // Rota para submeter novo post
     app.post('/api/novo-post', async(req, res) => {
         const novoPost = req.body;
         console.log('Recebido novo post:', novoPost); // Log para verificar os dados recebidos
@@ -83,6 +83,17 @@ connectToPostsCollection().then((collection) => {
             res.status(500).json({ message: 'Erro ao inserir usuário', error: error.message });
         }
     });
+
+    //rota para compilar postagens do usuario logado
+    app.get('/api/posts', async(req, res) => {
+        const username = req.query.username;
+        console.log('o nome do usuario para pegar posts é:' + username)
+
+        const posts = await postsCollection.find({}).toArray(); // Obtém todos os posts
+        const filteredPosts = posts.filter(post => post.user === username)
+        res.json(filteredPosts)
+    })
+
 }).catch((error) => {
     console.error('Falha ao conectar ao MongoDB/posts:', error);
 });
