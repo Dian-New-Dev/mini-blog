@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const connectToUsersCollection = require('./mongo'); // Importa a função de conexão
+const connectToPostsCollection = require('./mongo');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -64,7 +65,13 @@ connectToUsersCollection().then((collection) => {
 
 
 }).catch((error) => {
-    console.error('Falha ao conectar ao MongoDB:', error);
+    console.error('Falha ao conectar ao MongoDB/usuarios:', error);
+});
+
+connectToPostsCollection().then((collection) => {
+    console.log('oia');
+}).catch((error) => {
+    console.error('Falha ao conectar ao MongoDB/posts:', error);
 });
 
 app.listen(5000, () => {

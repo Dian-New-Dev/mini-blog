@@ -26,6 +26,21 @@ async function connectToUsersCollection() {
     throw error; // Lança o erro para ser tratado no servidor
   }
 }
-//run().catch(console.dir);
 
 module.exports = connectToUsersCollection;
+
+//conectar à coleção de posts
+async function connectToPostsCollection() {
+  try {
+    await client.connect();
+    await client.db("admin").command({ping: 1});
+    console.log("Conexao com colecao de posts bem sucedida");
+    return client.db("mini-blog").collection("posts");
+
+  } catch (error) {
+    console.error('erro ao conectar com mongodb/posts:', error)
+    throw error;
+  }
+}
+
+module.exposts = connectToPostsCollection;
