@@ -10,10 +10,10 @@ interface ListaDePostagensProps {
 }
 
 const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
-    useEffect(() => {
-            console.log('o valor de rerenderizar no filho é ' + reRenderizar)
-            
-        }, [reRenderizar])
+    
+    useEffect(() => {            
+        //vazio, apenas para re-renderizar
+    }, [reRenderizar])
     
     
     const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
@@ -46,7 +46,7 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                 leading-4
                 
                 '>
-                    Ordenadas desordens mentais {reRenderizar}</p>
+                    Ordenadas desordens mentais</p>
             </div>
 
             {<ul className='p-4 px-8 flex flex-col gap-2 list-disc'>

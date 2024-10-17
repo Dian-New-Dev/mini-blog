@@ -15,16 +15,14 @@ const Root: React.FC = () => {
     const loginCtxt = useContext(LoginContext)
 
     useEffect(() => {
-        console.log(`site on, está o usuario logado? ${loginCtxt?.isUserLoggedIn} `)
+        // vazio, mas se tirar o lista de postagens
+        //não rerenderiza apos novo post
     }, [loginCtxt])
 
     //controlar atualizacao da lista de postagens
     const [reRenderizar, setReRenderizar] = useState<number>(0);
-    let forceRerender = 0;
     useEffect(() => {
-        console.log('o valor de rerenderizar no pai é ' + reRenderizar)
-        console.log('o valor de forcererender no pai é ' + forceRerender)
-        forceRerender++
+        //vazio, apenas para rerenderizar
     }, [reRenderizar])
 
     

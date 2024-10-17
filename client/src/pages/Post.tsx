@@ -12,15 +12,15 @@ const Post: React.FC = () => {
     const titulo = params.postId
 
     useEffect(() => {
-        if (semPosts) {
-            console.log('usuário sem posts, como você clicou aqui?')
-        } else {
+
+
+
             for (let i = 0; i < listaDePosts.length; i++) {
                 if (listaDePosts[i].titulo === titulo) {
                     setCorpo(listaDePosts[i].corpo)
                 }
             }
-        }
+
 
     }, [titulo, listaDePosts, semPosts])
 
