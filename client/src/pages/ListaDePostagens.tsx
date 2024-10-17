@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { UserNameContext } from '../context/userNameContext';
+import { useListaDePostagens } from '../hooks/useListaDePostagens';
 
 
 interface ListaDePostagensProps {
@@ -11,47 +11,9 @@ interface ListaDePostagensProps {
 
 const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
 
-    //pegar nome do usuario
-    const userCtxt = useContext(UserNameContext)
-    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
-
-    useEffect(() => {
-        if (userCtxt?.userNameCtx) {
-            setNomeDoUsuario(userCtxt?.userNameCtx)
-        }
-    }, [])
-
-    //verificar se há array de posts do usuario
-    const [listaDePosts, setListaDePosts] = useState<any[]>([])
-    const [semPosts, setSemPosts] = useState<boolean>(true)
-
-    useEffect(() => {
-        console.log(nomeDoUsuario); // Verifique se o nome do usuário está correto
-        if (nomeDoUsuario) { // Verifique se o nome do usuário não está vazio
-            fetch(`http://localhost:5000/api/posts?username=${nomeDoUsuario}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setListaDePosts(data);
-                })
-                .catch(err => console.error('Error fetching data:', err));
-        }
-    }, [nomeDoUsuario, reRenderizar]);
-
-    useEffect(() => {
-        if (listaDePosts !== null) {
-            console.log('este usuario tem posts')
-           setSemPosts(false)
-        } else {
-            console.log('este usuario não tem posts')
-            setSemPosts(true)
-        }
-    }, [listaDePosts])
-
+    const { listaDePosts, semPosts } = useListaDePostagens();
+    
+    
     function linkClicado() {
         setClicouEmLinks(true)
     }

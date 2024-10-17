@@ -1,74 +1,32 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { UserNameContext } from '../context/userNameContext';
-
-
-interface arrayRecuperado { //para tipagem de array de objetos
-    titulo: string;
-    corpo: string;
-}
+import { useListaDePostagens } from '../hooks/useListaDePostagens';
 
 const Post: React.FC = () => {
 
-    //pegar nome do usuario
-    const userCtxt = useContext(UserNameContext)
-    const [nomeDoUsuario, setNomeDoUsuario] = useState<string>('')
+    const { listaDePosts, semPosts } = useListaDePostagens();
 
-    useEffect(() => {
-        if (userCtxt?.userNameCtx) {
-            setNomeDoUsuario(userCtxt?.userNameCtx)
-        }
-    }, [])
-
-    //pegar params
-
-    const params = useParams();
-
-    const [arrayRecuperado, setArrayRecuparedo] = useState<arrayRecuperado[]>([]);
     const [corpo, setCorpo] = useState<string>('');
 
-    // Carregar dados da coleção mongo/posts ao montar o componente
+    const params = useParams();
+    const titulo = params.postId
+
     useEffect(() => {
-        console.log('titulo:' + params.postId)
-        if (nomeDoUsuario && params.postId) {
-            const titulo = params.postId;
-            console.log(titulo)
-            fetch(`http://localhost:5000/api/singlePost?username=${nomeDoUsuario}&title=${titulo}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+        if (semPosts) {
+            console.log('usuário sem posts, como você clicou aqui?')
+        } else {
+            for (let i = 0; i < listaDePosts.length; i++) {
+                if (listaDePosts[i].titulo === titulo) {
+                    setCorpo(listaDePosts[i].corpo)
                 }
-                return response.json();
-            })
-            .then(data => {
-                setCorpo(data);
-            })
-            .catch(err => console.error('Erro pegando dados do post', err));
+            }
         }
-        
 
-        // const savedPosts = localStorage.getItem(nomeDoUsuario);
-        // if (savedPosts) {
-        //     const posts = JSON.parse(savedPosts);
-        //     setArrayRecuparedo(posts);
-            
-        //     montarPost(posts);
-        //     console.log('chegamos e chamamos')
-        // }
-    }, [nomeDoUsuario])
-
-    // function montarPost(posts) {
-    //     console.log(posts)
-    //     for (let i = 0; i < posts.length; i++) {
-    //         if (posts[i].titulo === params.postId) {
-    //             setCorpo(posts[i].corpo)
-    //         }
-    //     }
-    //     console.log(posts[0].titulo)
-    // }
+    }, [titulo, listaDePosts, semPosts])
 
 
+    
+    
     return (
         <div className='
         w-full
@@ -91,7 +49,7 @@ const Post: React.FC = () => {
                 text-3xl
                 font-bold
                 '>
-                    {params.postId}</h2>
+                    {titulo}</h2>
             </div>
 
             <div id='corpo-container' className=''>
