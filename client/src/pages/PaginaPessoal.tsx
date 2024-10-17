@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
+import GerenciarPosts from './GerenciarPosts';
 
 const PaginaPessoal: React.FC = () => {
+
+    //estado para mostrar gerenciar
+    const [mostrarGerenciar, setMostrarGerenciar] = useState<boolean>(false)
+    function clicouGerenciar() {
+        setMostrarGerenciar(true)
+    }
 
     const { id } = useParams();
 
@@ -26,7 +33,47 @@ const PaginaPessoal: React.FC = () => {
     }
 
     return (
-        <h1>Olá, esta é sua página pessoal, {id}</h1>
+        <div>
+            <div>
+                <h1>Olá, esta é sua página pessoal, {id}</h1>
+                <p>Vamos postar sobre o que hoje?</p>
+            </div>
+
+            <div>
+                <button className="
+                        bg-blue-600
+                        p-2
+                        border
+                        border-gray-700
+                        hover:bg-blue-800
+                        hover:scale-110
+                        font-bold"
+                        
+                        >
+                            <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
+                                Novo Post
+                            </Link>
+                </button >
+
+                <button className="
+                        bg-blue-600
+                        p-2
+                        border
+                        border-gray-700
+                        hover:bg-blue-800
+                        hover:scale-110
+                        font-bold"
+                        onClick={clicouGerenciar}
+                        >
+                            Gerenciar Posts
+                </button>
+            </div>
+
+            <div>
+                {mostrarGerenciar && <GerenciarPosts />}
+            </div>
+        </div>
+
     )
 
 };
