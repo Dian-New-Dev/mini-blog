@@ -26,6 +26,36 @@ connectToDatabase().then((collection) => {
         }
     });
 
+    //rota para login
+    app.post('/api/login', async(req, res) => {
+        const dadosLogin = req.body;
+        console.log('recebido nova tentativa de login', dadosLogin);
+        
+
+        try {
+            //busca user no banco de dados
+            const usuarioEncontrado = await usuariosCadastrados.findOne({ usuario: dadosLogin.usuario});
+
+            if (usuarioEncontrado) {
+                //verifica se senhas coincidem
+                if (usuarioEncontrado.senha1 === dadosLogin.senha1) {
+                    console.log('Login bem sucedido');
+                    res.status(200).json({message: 'Login bem sucedido'});
+                } else {
+                    console.log('senha incorreta');
+                    res.status(401).json({message: 'Senha incorreta'});
+                }
+            } else {
+                console.log('Usuario não encontrado');
+                res.status(404).json({message: 'Usuario não encotrzado'});
+            }
+        } catch (error) {
+            console.error('Erro durante login:', error);
+            res.status(500).json({message: 'Erro no servidor', error: error.message});
+        }
+        
+    })
+
     // Rota get para teste
     app.get("/api", (req, res) => {
         console.log("API endpoint hit");
