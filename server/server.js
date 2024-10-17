@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const connectToUsersCollection = require('./mongo'); // Importa a função de conexão
-const connectToPostsCollection = require('./mongo');
+const { connectToUsersCollection, connectToPostsCollection } = require('./mongo');
 const bodyParser = require('body-parser');
 const app = express();
 

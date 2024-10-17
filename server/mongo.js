@@ -17,7 +17,7 @@ async function connectToUsersCollection() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log("Conexao com colecao de usuarios bem sucedida");
     
     return client.db("mini-blog").collection("usuarios"); // Substitua "seuBancoDeDados" pelo nome do seu banco de dados
   
@@ -26,8 +26,6 @@ async function connectToUsersCollection() {
     throw error; // Lança o erro para ser tratado no servidor
   }
 }
-
-module.exports = connectToUsersCollection;
 
 //conectar à coleção de posts
 async function connectToPostsCollection() {
@@ -43,4 +41,7 @@ async function connectToPostsCollection() {
   }
 }
 
-module.exports = connectToPostsCollection;
+module.exports = {
+  connectToUsersCollection,
+  connectToPostsCollection
+};

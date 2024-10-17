@@ -44,8 +44,10 @@ const NovoPost: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const novoPost = { 
+            user: nomeDoUsuario,
             titulo: itemTitle,
-            corpo: itemBody
+            corpo: itemBody,
+            
         };
 
         try {
