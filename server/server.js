@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const connectToDatabase = require('./mongo'); // Importa a função de conexão
+const connectToUsersCollection = require('./mongo'); // Importa a função de conexão
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 let usuariosCadastrados;
 
-connectToDatabase().then((collection) => {
+connectToUsersCollection().then((collection) => {
     usuariosCadastrados = collection // armzena na varivel golbal
 
     // Rota para registro
@@ -62,9 +62,11 @@ connectToDatabase().then((collection) => {
         res.json({ "users": ["userOne", "UserTwo", "userThree"] });
     });
 
-    app.listen(5000, () => {
-        console.log('Server started on port 5000');
-    });
+
 }).catch((error) => {
     console.error('Falha ao conectar ao MongoDB:', error);
+});
+
+app.listen(5000, () => {
+    console.log('Server started on port 5000');
 });

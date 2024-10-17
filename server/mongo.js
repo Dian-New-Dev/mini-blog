@@ -10,7 +10,8 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function connectToDatabase() {
+//conectar à coleção de usuarios
+async function connectToUsersCollection() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -27,4 +28,4 @@ async function connectToDatabase() {
 }
 //run().catch(console.dir);
 
-module.exports = connectToDatabase;
+module.exports = connectToUsersCollection;
