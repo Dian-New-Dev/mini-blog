@@ -13,6 +13,15 @@ const GerenciarPosts: React.FC = () => {
     const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
 
     console.log(listaDePosts)
+
+    function apagarPost(post) {
+        console.log(post)
+    }
+
+    function editarPost(post) {
+        console.log(post)
+
+    }
     
 
     return (
@@ -22,9 +31,9 @@ const GerenciarPosts: React.FC = () => {
             <div className=''>
                 {
                     listaDePosts.map((item, index) => (
-                        <div className='border bg-green-950 text-green-200 flex'>
+                        <div key={index} className='border bg-green-950 text-green-200 flex'>
                             <div className='w-[80%]'>
-                                <div key={index} className='hover:underdivne hover:scale-105 hover:text-green-300'>
+                                <div className='hover:underdivne hover:scale-105 hover:text-green-300'>
                                     <NavLink to={`/post/${item.titulo}`}>
                                         {item.titulo}
                                     </NavLink>
@@ -35,8 +44,8 @@ const GerenciarPosts: React.FC = () => {
                                 
                             </div>
                             <div className='flex gap-4 w-[20%]'>
-                                <button>Apagar</button>
-                                <button>Editar</button>
+                                <button onClick={() => apagarPost(item)}>Apagar</button>
+                                <button onClick={() => editarPost(item) }>Editar</button>
                             </div>
                         
                         </div>
