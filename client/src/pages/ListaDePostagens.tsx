@@ -40,7 +40,7 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
                 })
                 .catch(err => console.error('Error fetching data:', err));
         }
-    }, [nomeDoUsuario]);
+    }, [nomeDoUsuario, reRenderizar]);
 
     useEffect(() => {
         if (listaDePosts !== null) {
