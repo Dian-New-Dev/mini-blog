@@ -101,7 +101,13 @@ connectToPostsCollection().then((collection) => {
         console.log('chegou aqui os dados para requisição:')
         console.log(username)
         console.log(title)
-        res.json({ "users": ["userOne", "UserTwo", "userThree"] });
+        try {
+            const post = await postsCollection.findOne({user: username, titulo: title });
+            res.json(post.corpo) 
+        } catch(error) {
+            res.status(500).json({message: 'erro ao buscar o post', error: error.message});
+        }
+
     })
 
 }).catch((error) => {
