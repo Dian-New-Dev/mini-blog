@@ -35,24 +35,40 @@ const NovoPost: React.FC = () => {
     useEffect(() => {
         if (userCtxt?.userNameCtx) {
             setNomeDoUsuario(userCtxt?.userNameCtx)
-            console.log(nomeDoUsuario)
         }
     }, [])
 
         
     //
     
-    function handleSubmit(e: React.FormEvent) {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const novoPost = { titulo: itemTitle, corpo: itemBody };
-    
-        // Atualiza o estado local antes de armazenar no localStorage
-        const updatedArray = [...arrayDeObjetosOG, novoPost];
-        setArrayDeObjetosOG(updatedArray);
-    
-        // Atualiza o localStorage com os novos dados
-        //nome do array é o nome do usuario
-        localStorage.setItem(nomeDoUsuario, JSON.stringify(updatedArray));
+        const novoPost = { 
+            titulo: itemTitle,
+            corpo: itemBody
+        };
+
+        try {
+            const response = await fetch("http://localhost:5000/api/novo-post", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(novoPost)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Post submetido com sucesso', result)
+            } else {
+                console.error('Post não foi submetido', response.statusText)
+            }
+        } catch (error) {
+            console.error('erro ao submeter post:', error)
+        }
+        
+        
+       
     
         // Atualiza o estado que deve acionar a re-renderização
         setReRenderizar(prev => prev + 1);
@@ -63,17 +79,17 @@ const NovoPost: React.FC = () => {
     }
     
 
-    useEffect(() => {
-        // Carregar dados do localStorage ao montar o componente
-        const savedPosts = localStorage.getItem(nomeDoUsuario);
-        console.log(savedPosts)
-        if (savedPosts) {
-            const posts = JSON.parse(savedPosts);
-            setArrayDeObjetosOG(posts);
-            // Atualiza o reRenderizar aqui para refletir a mudança
-            setReRenderizar(prev => prev + 1); // Para garantir que o estado atualize
-        }
-    }, [nomeDoUsuario]);
+    // useEffect(() => {
+    //     // Carregar dados do localStorage ao montar o componente
+    //     const savedPosts = localStorage.getItem(nomeDoUsuario);
+    //     console.log(savedPosts)
+    //     if (savedPosts) {
+    //         const posts = JSON.parse(savedPosts);
+    //         setArrayDeObjetosOG(posts);
+    //         // Atualiza o reRenderizar aqui para refletir a mudança
+    //         setReRenderizar(prev => prev + 1); // Para garantir que o estado atualize
+    //     }
+    // }, [nomeDoUsuario]);
     
 
     useEffect(() => {
@@ -149,3 +165,11 @@ const NovoPost: React.FC = () => {
 };
 
 export default NovoPost;
+
+//  // Atualiza o estado local antes de armazenar no localStorage
+//  const updatedArray = [...arrayDeObjetosOG, novoPost];
+//  setArrayDeObjetosOG(updatedArray);
+
+//  // Atualiza o localStorage com os novos dados
+//  //nome do array é o nome do usuario
+//  localStorage.setItem(nomeDoUsuario, JSON.stringify(updatedArray));

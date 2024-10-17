@@ -69,7 +69,21 @@ connectToUsersCollection().then((collection) => {
 });
 
 connectToPostsCollection().then((collection) => {
-    console.log('oia');
+    postsCollection = collection // armzena na varivel golbal
+
+    // Rota para registro
+    app.post('/api/novo-post', async(req, res) => {
+        const novoPost = req.body;
+        console.log('Recebido novo post:', novoPost); // Log para verificar os dados recebidos
+        try {
+            const resultado = await postsCollection.insertOne(novoPost);
+            console.log('Usuário inserido com sucesso:', resultado); // Log para confirmar inserção
+            res.status(201).json(resultado);
+        } catch (error) {
+            console.error('Erro ao inserir usuário:', error); // Log para capturar erro
+            res.status(500).json({ message: 'Erro ao inserir usuário', error: error.message });
+        }
+    });
 }).catch((error) => {
     console.error('Falha ao conectar ao MongoDB/posts:', error);
 });

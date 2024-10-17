@@ -43,4 +43,4 @@ async function connectToPostsCollection() {
   }
 }
 
-module.exposts = connectToPostsCollection;
+module.exports = connectToPostsCollection;
