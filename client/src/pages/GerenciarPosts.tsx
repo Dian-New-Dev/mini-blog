@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useListaDePostagens } from '../hooks/useListaDePostagens';
 import { useOutletContext } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { UserNameContext } from '../context/userNameContext';
+
 
 
 
 const GerenciarPosts: React.FC = () => {
-
+    // outlet context para atualizar rerenderizar se posts apagados ou editados
     const [reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks] = useOutletContext();
 
+    //estado para guardar post clicado pelo usuario
+    const [postSelecionado, setPostSelecionado] = useState<object>({})
 
+    //logica para deletar post
     const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
     const [mostrarModal, setMostrarModal] = useState<boolean>(false);
-    const [postSelecionado, setPostSelecionado] = useState<object>({})
+
     
     function apagarPost(post) {
         console.log(post)
@@ -24,6 +29,7 @@ const GerenciarPosts: React.FC = () => {
         if (decisao === 0) {
             deletePost();
             setReRenderizar(prev => prev + 1)
+            setMostrarModal(false)
         } else {
             setMostrarModal(false)
         }
@@ -52,14 +58,120 @@ const GerenciarPosts: React.FC = () => {
         }
     }
 
-    function editarPost(post) {
-        console.log(post)
+    //logica para edicao de post:
+        //contexto para saber nome de usuario
 
+    const usuarioCtxt = useContext(UserNameContext)
+
+    const [mostrarModalEdicao, setMostrarModdalEdicao] = useState<boolean>(false)
+    const [itemTitle, setItemTitle] = useState<string[]>([]);
+    const [itemBody, setItemBody] = useState<string[]>([]);
+
+    function editarPost(post:object) {
+        console.log('aqui na funcao editar post o valor de post é ' + post)
+        setPostSelecionado(post)
+        setMostrarModdalEdicao(true)
+
+    }
+
+    function handleInputTitle(e:React.ChangeEvent<HTMLInputElement>) {
+        setItemTitle(e.target.value)
+    }
+
+    function handleInputBody(e:React.ChangeEvent<HTMLInputElement>) {
+        setItemBody(e.target.value)
+    }
+
+    const [mostrarEdicaoConfirmada, setMostrarEdicaoConfirmada] = useState<boolean>(false)
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const postAtualizado = {
+            user: usuarioCtxt?.userNameCtx,
+            titulo: itemTitle,
+            corpo: itemBody,
+            
+        };
+
+        try {
+            const id = postSelecionado._id;
+            console.log('aqui no GerenciarPosts o valor de id é: ' + postSelecionado)
+            const response = await fetch(`http://localhost:5000/api/edit-post?id=${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postAtualizado)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Post editado com sucesso', result)
+            } else {
+                console.error('Post não foi editado', response.statusText)
+            }
+        } catch (error) {
+            console.error('erro ao editar post:', error)
+        }
+        
+        setReRenderizar(prev => prev + 1);
+
+        setMostrarEdicaoConfirmada(true)
     }
     
 
     return (
         <div className='relative'>
+
+            <div className={`
+                ${mostrarModalEdicao ? 'block' : 'hidden'}
+                grid
+                place-items-center
+                w-screen
+                h-screen
+                z-50
+                `}>
+
+                    <div className='bg-red-900 w-full h-full'>
+                        <form className='
+                            w-full
+                            h-full
+                            flex
+                            flex-col
+                            gap-2' 
+                            onSubmit={handleSubmit}>
+                                <label htmlFor="titulo">Título</label>
+                                <input className='
+                                text-green-950
+                                p-2
+                                '
+                                onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
+                                
+                                <label htmlFor="novo-post">Texto</label>
+                                <textarea className='
+                                flex-grow
+                                text-green-950
+                                p-2
+                                '
+                                onChange={handleInputBody} name="novo-post" id="novo-post" />
+                                
+                            
+                                <button className='
+                                bg-blue-600
+                                p-2
+                                border
+                                border-gray-700
+                                hover:bg-blue-800
+                                w-[200px]
+                                mx-auto
+                                font-bold
+                                mt-1
+                                
+                                '
+                                type='submit'>Postar</button>
+                        </form>
+                    </div>
+
+            </div>
 
             <div className={`
                 ${mostrarModal ? 'block' : 'hidden'}

@@ -114,7 +114,6 @@ connectToPostsCollection().then((collection) => {
     //rota para deleter um unico post
     app.delete('/api/delete-post', async(req, res) => {
         const id = req.query.id;
-        console.log(id)
         try {
             const query = {_id: new ObjectId(id)}
             const result = await postsCollection.deleteOne(query)
@@ -127,6 +126,25 @@ connectToPostsCollection().then((collection) => {
             
         } catch(error) {
             res.status(500).json({message: 'erro ao deletar o post', error: error.message});
+        }
+    })
+
+    app.put('/api/edit-post', async(req, res) => {
+        const id = req.query.id;
+        console.log('este é o id do post a ser alterado', id)
+        try {
+            const query = {_id: new ObjectId(id)}
+            const postEditado = req.body;
+            console.log('Recebido post que sobrevescreverá o anterior:', postEditado); // Log para verificar os dados recebidos
+            const novosValores = {
+                user: postEditado.user,
+                titulo: postEditado.user,
+                corpo: postEditado.user,
+            };
+            const result = await postsCollection.replaceOne(query, novosValores)
+            res.json({ message: 'Post atualizado com sucesso', result });
+        } catch (error) {
+            res.status(500).json({message: 'erro ao editar o post', error: error.message})
         }
     })
 
