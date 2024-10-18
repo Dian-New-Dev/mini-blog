@@ -10,7 +10,11 @@ interface arrayRecuperado { //para tipagem de array de objetos
     corpo: string;
 }
 
-const OutletPlaceHolder: React.FC = () => {
+interface Props {
+    ultimoPost: string;
+}
+
+const OutletPlaceHolder: React.FC<Props> = ({ultimoPost}) => {
     //2 returns
 
     //se isLoged = mostrar ultimo post do array do usuario
@@ -40,7 +44,8 @@ const OutletPlaceHolder: React.FC = () => {
     const [corpo, setCorpo] = useState<string>('');
 
     useEffect(() => {
-        // Carregar dados do localStorage ao montar o componente
+        // Mandar para o ultimo post ao montar o componente
+        console.log('aqui no placeholder o valor de ultimo post é ' + ultimoPost)
         const savedPosts = localStorage.getItem(nomeDoUsuario);
         if (savedPosts) {
             const posts = JSON.parse(savedPosts);

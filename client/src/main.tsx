@@ -19,8 +19,6 @@ import LoginPosCadastro from './pages/LoginPosCadastro'
 import { LoginContextProvider } from './context/loginContext'
 import PaginaPessoal from './pages/PaginaPessoal'
 import { UserNameContextProvider } from './context/userNameContext'
-import GerenciarPosts from './pages/GerenciarPosts'
-
 const router = createBrowserRouter([
     {
         //elemento root route, o resto renderiza dentro dele

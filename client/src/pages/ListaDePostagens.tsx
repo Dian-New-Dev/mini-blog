@@ -7,16 +7,32 @@ import { useListaDePostagens } from '../hooks/useListaDePostagens';
 interface ListaDePostagensProps {
     reRenderizar: number;
     setClicouEmLinks: React.Dispatch<React.SetStateAction<boolean>>;
+    setUltimoPost: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks }) => {
+const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setClicouEmLinks, setUltimoPost }) => {
     
-    useEffect(() => {            
+    useEffect(() => {    
+       
         //vazio, apenas para re-renderizar
+
     }, [reRenderizar])
+
+
     
-    
+
     const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
+
+    useEffect(() => {    
+        setTimeout(() => {
+            const index = listaDePosts.length
+            setUltimoPost(`/post/${listaDePosts[(index-1)].titulo}`)    
+        }, 1000);        
+
+
+    }, [listaDePosts])
+
+
 
     
     function linkClicado() {

@@ -28,6 +28,11 @@ const Root: React.FC = () => {
         //console.log('valor de rerenderizar = ' + reRenderizar)
     }, [reRenderizar])
 
+    const [ultimoPost, setUltimoPost] = useState<string>('');
+    useEffect(() => {
+        console.log(`aqui no pai o valor de ultimopost é ` + ultimoPost)
+    }, [ultimoPost])
+
     
 
 
@@ -117,7 +122,7 @@ const Root: React.FC = () => {
 
                 <nav className="">
                     <ul>
-                        {loginCtxt?.isUserLoggedIn && <ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} />}
+                        {loginCtxt?.isUserLoggedIn && <ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} setUltimoPost={setUltimoPost} />}
                     </ul>
                 </nav>
 
@@ -188,7 +193,7 @@ const Root: React.FC = () => {
                         {clicouEmLinks ?
                         <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks }} />
 
-                        : <OutletPlaceHolder />}
+                        : <OutletPlaceHolder ultimoPost={ultimoPost}  />}
                         
                         
                     </div>
