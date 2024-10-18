@@ -3,26 +3,39 @@ import { useOutletContext, useNavigate } from 'react-router-dom';
 
 import { UserNameContext } from '../context/userNameContext';
 
-interface arrayDeObjetosOG { //para tipagem de array de objetos
-    titulo: string;
-    corpo: string;
+interface ContextOutlet {
+    reRenderizar: number;
+    setReRenderizar: React.Dispatch<React.SetStateAction<number>>;
+    clicouEmLinks: boolean;
+    setClicouEmLinks: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NovoPost: React.FC = () => {
 
+
     const navigate = useNavigate();
 
-    const [reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks] = useOutletContext();
+    const {setReRenderizar, setClicouEmLinks} = useOutletContext<ContextOutlet>();
 
-    const [itemTitle, setItemTitle] = useState<string[]>([]);
-    const [itemBody, setItemBody] = useState<string[]>([]);
-    const [arrayDeObjetosOG, setArrayDeObjetosOG] = useState<arrayDeObjetosOG[]>([]);
+    const [itemTitle, setItemTitle] = useState<string>();
+    const [itemBody, setItemBody] = useState<string>();
+
+    
+    // useEffect(() => {
+    //     console.log('componente NovoPost montado pois alterou-se titulo')
+    // }, [itemTitle])
+
+    // useEffect(() => {
+    //     console.log('componente NovoPost montado pois alterou-se corpo')
+    // }, [itemBody])
+
+    
 
     function handleInputTitle(e:React.ChangeEvent<HTMLInputElement>) {
         setItemTitle(e.target.value)
     }
 
-    function handleInputBody(e:React.ChangeEvent<HTMLInputElement>) {
+    function handleInputBody(e:React.ChangeEvent<HTMLTextAreaElement>) {
         setItemBody(e.target.value)
     }
     
@@ -79,28 +92,6 @@ const NovoPost: React.FC = () => {
 
         setClicouEmLinks(false)
     }
-    
-
-    // useEffect(() => {
-    //     // Carregar dados do localStorage ao montar o componente
-    //     const savedPosts = localStorage.getItem(nomeDoUsuario);
-    //     console.log(savedPosts)
-    //     if (savedPosts) {
-    //         const posts = JSON.parse(savedPosts);
-    //         setArrayDeObjetosOG(posts);
-    //         // Atualiza o reRenderizar aqui para refletir a mudança
-    //         setReRenderizar(prev => prev + 1); // Para garantir que o estado atualize
-    //     }
-    // }, [nomeDoUsuario]);
-    
-
-    useEffect(() => {
-        if (arrayDeObjetosOG.length > 0) { //sem esse if, o useEffect resetaria o localstorage a cada montagem
-            localStorage.setItem(nomeDoUsuario, JSON.stringify(arrayDeObjetosOG));
-        }
-    }, [arrayDeObjetosOG]) // essa dependencia tem de estar aqui
-    //par que este useEffect ocorra logo após o nome de usuario
-    //ser captado e consiga add ao array ao inves de criar um novo
 
     return (
         <div 
@@ -167,11 +158,3 @@ const NovoPost: React.FC = () => {
 };
 
 export default NovoPost;
-
-//  // Atualiza o estado local antes de armazenar no localStorage
-//  const updatedArray = [...arrayDeObjetosOG, novoPost];
-//  setArrayDeObjetosOG(updatedArray);
-
-//  // Atualiza o localStorage com os novos dados
-//  //nome do array é o nome do usuario
-//  localStorage.setItem(nomeDoUsuario, JSON.stringify(updatedArray));

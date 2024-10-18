@@ -10,6 +10,8 @@ import MiniPerfil from "../pages/MiniPerfil";
 import OutletPlaceHolder from "../pages/OutletPlaceHolder";
 import TesteAPI from "../pages/TesteAPI";
 
+
+
 const Root: React.FC = () => {
 
     const loginCtxt = useContext(LoginContext)
@@ -184,7 +186,8 @@ const Root: React.FC = () => {
                     
                     ">
                         {clicouEmLinks ?
-                        <Outlet context={[reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks]} />
+                        <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks }} />
+
                         : <OutletPlaceHolder />}
                         
                         

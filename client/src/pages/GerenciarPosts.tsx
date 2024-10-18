@@ -1,25 +1,41 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useListaDePostagens } from '../hooks/useListaDePostagens';
 import { useOutletContext } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { UserNameContext } from '../context/userNameContext';
 
+interface ContextOutlet {
+    reRenderizar: number;
+    setReRenderizar: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface Post {
+    _id: string;
+    user: string;
+    titulo: string;
+    corpo: string;
+    // Outras propriedades, se houver
+}
 
 
 
 const GerenciarPosts: React.FC = () => {
     // outlet context para atualizar rerenderizar se posts apagados ou editados
-    const [reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks] = useOutletContext();
+    const {reRenderizar, setReRenderizar} = useOutletContext<ContextOutlet>();
 
     //estado para guardar post clicado pelo usuario
-    const [postSelecionado, setPostSelecionado] = useState<object>({})
+    const [postSelecionado, setPostSelecionado] = useState<Post | null>(null)
 
     //logica para deletar post
     const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
+
+    console.log(semPosts)
+    
+
     const [mostrarModal, setMostrarModal] = useState<boolean>(false);
 
     
-    function apagarPost(post) {
+    function apagarPost(post:Post) {
         console.log(post)
         setPostSelecionado(post)
         setMostrarModal(true)
@@ -64,12 +80,14 @@ const GerenciarPosts: React.FC = () => {
     const usuarioCtxt = useContext(UserNameContext)
 
     const [mostrarModalEdicao, setMostrarModdalEdicao] = useState<boolean>(false)
-    const [itemTitle, setItemTitle] = useState<string[]>([]);
-    const [itemBody, setItemBody] = useState<string[]>([]);
+    const [itemTitle, setItemTitle] = useState<string>();
+    const [itemBody, setItemBody] = useState<string>();
 
-    function editarPost(post:object) {
-        console.log('aqui na funcao editar post o valor de post é ' + post)
-        setPostSelecionado(post)
+    
+
+    function editarPost(post:Post) {
+        setPostSelecionado(post) //apenas para pegar id
+        console.log('aqui na funcao editar post o valor de post é ' + JSON.stringify(post))
         setMostrarModdalEdicao(true)
 
     }
@@ -78,44 +96,55 @@ const GerenciarPosts: React.FC = () => {
         setItemTitle(e.target.value)
     }
 
-    function handleInputBody(e:React.ChangeEvent<HTMLInputElement>) {
+    function handleInputBody(e:React.ChangeEvent<HTMLTextAreaElement>) {
         setItemBody(e.target.value)
     }
 
-    const [mostrarEdicaoConfirmada, setMostrarEdicaoConfirmada] = useState<boolean>(false)
+    // const [mostrarEdicaoConfirmada, setMostrarEdicaoConfirmada] = useState<boolean>(false)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const postAtualizado = {
-            user: usuarioCtxt?.userNameCtx,
-            titulo: itemTitle,
-            corpo: itemBody,
-            
-        };
-
-        try {
-            const id = postSelecionado._id;
-            console.log('aqui no GerenciarPosts o valor de id é: ' + postSelecionado)
-            const response = await fetch(`http://localhost:5000/api/edit-post?id=${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postAtualizado)
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Post editado com sucesso', result)
-            } else {
-                console.error('Post não foi editado', response.statusText)
+        if (postSelecionado) {
+            console.log('postSelecionado não parece estar vazio, eis seu valor: ' + postSelecionado)
+            console.log('e agora eis o seu valor stringifado: ' + JSON.stringify(postSelecionado))
+            const postAtualizado = {
+                id: postSelecionado._id, //correto
+                user: postSelecionado.user, // correto
+                titulo: itemBody, //// errado, temos que pegar valor atualizado
+                corpo: itemTitle, //// errado, temos que pegar valor atualizado
+                
+            };
+            console.log('o valor de postatualizado é: ' + postAtualizado)
+    
+            try {
+                console.log('o valor de postAtualizado sendo passado para fech é' + JSON.stringify(postAtualizado))
+                const response = await fetch(`http://localhost:5000/api/edit-post?id=${postAtualizado.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    
+                    body: JSON.stringify(postAtualizado)
+                });
+    
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Post editado com sucesso', result)
+                } else {
+                    console.error('Post não foi editado', response.statusText)
+                }
+            } catch (error) {
+                console.error('erro ao editar post:', error)
             }
-        } catch (error) {
-            console.error('erro ao editar post:', error)
+            
+            setReRenderizar(prev => prev + 1);
+
+        } else {
+            console.log('postSelecionado parece ser nulo, eis o seu valor atual' + postSelecionado)
         }
         
-        setReRenderizar(prev => prev + 1);
+        
 
-        setMostrarEdicaoConfirmada(true)
+        // setMostrarEdicaoConfirmada(true)
     }
     
 
@@ -144,6 +173,7 @@ const GerenciarPosts: React.FC = () => {
                                 text-green-950
                                 p-2
                                 '
+                                //value={itemTitle}
                                 onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
                                 
                                 <label htmlFor="novo-post">Texto</label>
@@ -151,7 +181,9 @@ const GerenciarPosts: React.FC = () => {
                                 flex-grow
                                 text-green-950
                                 p-2
+                                
                                 '
+                                //value={itemBody}
                                 onChange={handleInputBody} name="novo-post" id="novo-post" />
                                 
                             
@@ -167,8 +199,27 @@ const GerenciarPosts: React.FC = () => {
                                 mt-1
                                 
                                 '
-                                type='submit'>Postar</button>
+                                type='submit'>
+                                    Postar</button>
+
+
                         </form>
+                        <button className='
+                                bg-blue-600
+                                p-2
+                                border
+                                border-gray-700
+                                hover:bg-blue-800
+                                w-[200px]
+                                mx-auto
+                                font-bold
+                                mt-1
+                                
+                                '
+                                onClick={() => setMostrarModdalEdicao(false)}>
+                                    Cancelar
+
+                                </button>
                     </div>
 
             </div>
@@ -217,7 +268,7 @@ const GerenciarPosts: React.FC = () => {
                             </div>
                             <div className='flex gap-4 w-[20%]'>
                                 <button onClick={() => apagarPost(item)}>Apagar</button>
-                                <button onClick={() => editarPost(item) }>Editar</button>
+                                <button onClick={() => editarPost(item)}>Editar</button>
                             </div>
                         
                         </div>
