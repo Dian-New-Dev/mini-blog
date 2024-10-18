@@ -179,3 +179,7 @@ app.use(cors());
 Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse um array, utilizando await postsCollection.find({}).toArray() para obter todos os posts do banco de dados. Assim, foi possível aplicar o método filter corretamente para filtrar as postagens com base no nome do usuário.
 
 - Criei um custom hook para fazer o fetch das postagens feitas pelo usuario, para que eu possa usar esses dados em varios componentes. Contudo, em componentes que precisam rerenderizar, o hook não acompanha a rerenderização junto com o resto do componente. para corrigir isso, incluí um argumento "rerenderizar" no hook, o qual deve ser passado por todo componente que for consumir este hook.
+
+- fetch get não precisa declarar método, mas outros métodos precisam (post, delete, etc)
+
+- para fazer fetch passando o id de um documento como param, deve-se importar ObjectId e usar new ObjectId(id)

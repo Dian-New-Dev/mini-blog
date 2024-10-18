@@ -33,7 +33,9 @@ async function connectToPostsCollection() {
     await client.connect();
     await client.db("admin").command({ping: 1});
     console.log("Conexao com colecao de posts bem sucedida");
+    
     return client.db("mini-blog").collection("posts");
+    
 
   } catch (error) {
     console.error('erro ao conectar com mongodb/posts:', error)

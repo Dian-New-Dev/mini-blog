@@ -3,6 +3,7 @@ const cors = require('cors');
 const { connectToUsersCollection, connectToPostsCollection } = require('./mongo');
 const bodyParser = require('body-parser');
 const app = express();
+const { ObjectId } = require('mongodb');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -69,7 +70,7 @@ connectToUsersCollection().then((collection) => {
 
 connectToPostsCollection().then((collection) => {
     const postsCollection = collection // armzena na varivel golbal
-
+    
     // Rota para submeter novo post
     app.post('/api/novo-post', async(req, res) => {
         const novoPost = req.body;
@@ -110,11 +111,20 @@ connectToPostsCollection().then((collection) => {
 
     })
 
+    //rota para deleter um unico post
     app.delete('/api/delete-post', async(req, res) => {
         const id = req.query.id;
         console.log(id)
         try {
-            res.json({message: 'tudo certo'}) 
+            const query = {_id: new ObjectId(id)}
+            const result = await postsCollection.deleteOne(query)
+            if (result.deletedCount === 1) {
+                console.log('Um documento foi deletado com sucesso')
+                res.json({message: 'tudo certo'}) 
+            } else {
+                console.log('Nenhum documento bateu a pesquisa, nada deletado')
+            }
+            
         } catch(error) {
             res.status(500).json({message: 'erro ao deletar o post', error: error.message});
         }
