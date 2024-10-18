@@ -109,8 +109,8 @@ const GerenciarPosts: React.FC = () => {
             const postAtualizado = {
                 id: postSelecionado._id, //correto
                 user: postSelecionado.user, // correto
-                titulo: itemBody, //// errado, temos que pegar valor atualizado
-                corpo: itemTitle, //// errado, temos que pegar valor atualizado
+                titulo: itemTitle , //// errado, temos que pegar valor atualizado
+                corpo: itemBody, //// errado, temos que pegar valor atualizado
                 
             };
             console.log('o valor de postatualizado é: ' + postAtualizado)

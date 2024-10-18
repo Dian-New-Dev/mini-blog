@@ -138,8 +138,8 @@ connectToPostsCollection().then((collection) => {
             console.log('Recebido post que sobrevescreverá o anterior:', postEditado); // Log para verificar os dados recebidos
             const novosValores = {
                 user: postEditado.user,
-                titulo: postEditado.user,
-                corpo: postEditado.user,
+                titulo: postEditado.titulo,
+                corpo: postEditado.corpo,
             };
             const result = await postsCollection.replaceOne(query, novosValores)
             res.json({ message: 'Post atualizado com sucesso', result });
