@@ -9,6 +9,10 @@ const MiniPerfil: React.FC = () => {
     
     //estado para armazenar endereço da foto de perfil
     const [fotoDePerfil, setFotoDePerfil] = useState<string>('')
+
+    function clicouNoNome() {
+        
+    }
     
     
     
@@ -33,7 +37,7 @@ const MiniPerfil: React.FC = () => {
 
             <div className='w-[75%]'>
                 <Link to={`/my-page/${usuarioCtxt?.userNameCtx}`}>
-                    <p className='font-bold'>{usuarioCtxt?.userNameCtx}</p>
+                    <button onClick={clicouNoNome} className='font-bold'>{usuarioCtxt?.userNameCtx}</button>
                 </Link>
                 
                 <p className='italic'>Que tal adicionar uma descrição?</p>
