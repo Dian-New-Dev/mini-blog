@@ -183,3 +183,29 @@ Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse 
 - fetch get não precisa declarar método, mas outros métodos precisam (post, delete, etc)
 
 - para fazer fetch passando o id de um documento como param, deve-se importar ObjectId e usar new ObjectId(id)
+
+- FOrms: para resetar os campos quando estes não são controlados, deve-se associa-los com estado react não vazio, mas sem valor definido:
+
+```
+    const [itemTitle, setItemTitle] = useState<string>(''); //ênfase nas aspas vazias dentro do ()
+```
+
+```
+                                <label htmlFor="titulo">Título</label>
+                                <input className='text-green-950 p-2'
+                                value={itemTitle} //ênfase aqui
+                                onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
+```
+
+- forms: input text e tesxt area tem tipagem diferente:
+
+```
+    function handleTextInput(e:React.ChangeEvent<HTMLInputElement>) {
+        setInput(e.target.value)
+    }
+
+    function handleTextArea(e:React.ChangeEvent<HTMLTextAreaElement>) {
+        setTextArea(e.target.value)
+    }
+```
+

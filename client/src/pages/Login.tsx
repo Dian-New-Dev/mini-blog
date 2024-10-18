@@ -59,7 +59,6 @@ const Login: React.FC = () => {
 
             if(response.ok) {
                 const result = await response.json();
-                console.log('Login avaliado com sucesso', result)
                 setLoginGreenLit(true)
             } else {
                 console.error('Login não foi bem sucedido', response.statusText)
@@ -206,43 +205,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-    //acessar dados do LocalStorage
-    // const [listaDeUsuarios, setListaDeUsuarios] = useState<usuarios[]>([])
-    // function acessarDadosdoLocalStorage() {
-    //     const users = localStorage.getItem('usuarios');
-    //     const lista = users ? JSON.parse(users) : [];
-    //     setListaDeUsuarios(lista); // Isso atualiza de forma assíncrona
-    // }
-    
-    // //quando listaDeUsuarios recebe os dados do localStorage,
-    // // esse ufeEffect aciona e dá seguimento ao fluxo
-    // useEffect(() => {
-    //     validarLogin();
-    // }, [listaDeUsuarios]);
-
-    // //com dados do localstorage e do form compilados
-    // // tentar validar login
-    // function validarLogin() {
-    //     if (listaDeUsuarios) {
-    //         for (let i = 0; i < listaDeUsuarios.length; i++) {
-
-    //             if (listaDeUsuarios[i].usuario === userInput) {
-    //                 if (listaDeUsuarios[i].senha1 === passwordInput) {
-    //                     console.log('encontramos um usuario com esse  nome e o password parece correto')
-    //                     setLoginGreenLit(true)
-    //                     break;
-    //                 } else {
-    //                     console.log('há um user mas senha incorreta')
-    //                     setErroSenha(true)
-    //                     return
-    //                 }
-
-    //             } else {
-    //                 console.log('não achou nome')
-    //                 setErroNome(true)
-    //             }
-    //         }
-    //     }
-        
-    // }

@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useListaDePostagens } from '../hooks/useListaDePostagens';
 import { useOutletContext } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { UserNameContext } from '../context/userNameContext';
 
 interface ContextOutlet {
     reRenderizar: number;
@@ -75,19 +74,14 @@ const GerenciarPosts: React.FC = () => {
     }
 
     //logica para edicao de post:
-        //contexto para saber nome de usuario
-
-    const usuarioCtxt = useContext(UserNameContext)
-
     const [mostrarModalEdicao, setMostrarModdalEdicao] = useState<boolean>(false)
-    const [itemTitle, setItemTitle] = useState<string>();
-    const [itemBody, setItemBody] = useState<string>();
+    const [itemTitle, setItemTitle] = useState<string>('');
+    const [itemBody, setItemBody] = useState<string>('');
 
     
 
     function editarPost(post:Post) {
         setPostSelecionado(post) //apenas para pegar id
-        console.log('aqui na funcao editar post o valor de post é ' + JSON.stringify(post))
         setMostrarModdalEdicao(true)
 
     }
@@ -100,7 +94,7 @@ const GerenciarPosts: React.FC = () => {
         setItemBody(e.target.value)
     }
 
-    // const [mostrarEdicaoConfirmada, setMostrarEdicaoConfirmada] = useState<boolean>(false)
+    const [mostrarEdicaoConfirmada, setMostrarEdicaoConfirmada] = useState<boolean>(false)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (postSelecionado) {
@@ -129,6 +123,7 @@ const GerenciarPosts: React.FC = () => {
                 if (response.ok) {
                     const result = await response.json();
                     console.log('Post editado com sucesso', result)
+                    setMostrarEdicaoConfirmada(true)
                 } else {
                     console.error('Post não foi editado', response.statusText)
                 }
@@ -146,6 +141,14 @@ const GerenciarPosts: React.FC = () => {
 
         // setMostrarEdicaoConfirmada(true)
     }
+
+    function terminarEdicao() {
+        setMostrarEdicaoConfirmada(false)
+        setMostrarModdalEdicao(false)
+        setMostrarModal(false)
+        setItemTitle('')
+        setItemBody('')
+    }
     
 
     return (
@@ -160,7 +163,7 @@ const GerenciarPosts: React.FC = () => {
                 z-50
                 `}>
 
-                    <div className='bg-red-900 w-full h-full'>
+                    <div className={`bg-red-900 w-full h-full ${mostrarEdicaoConfirmada ? 'hidden' : 'block'}`}>
                         <form className='
                             w-full
                             h-full
@@ -169,11 +172,8 @@ const GerenciarPosts: React.FC = () => {
                             gap-2' 
                             onSubmit={handleSubmit}>
                                 <label htmlFor="titulo">Título</label>
-                                <input className='
-                                text-green-950
-                                p-2
-                                '
-                                //value={itemTitle}
+                                <input className='text-green-950 p-2'
+                                value={itemTitle}
                                 onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
                                 
                                 <label htmlFor="novo-post">Texto</label>
@@ -183,7 +183,7 @@ const GerenciarPosts: React.FC = () => {
                                 p-2
                                 
                                 '
-                                //value={itemBody}
+                                value={itemBody}
                                 onChange={handleInputBody} name="novo-post" id="novo-post" />
                                 
                             
@@ -222,6 +222,10 @@ const GerenciarPosts: React.FC = () => {
                                 </button>
                     </div>
 
+                    <div className={`bg-red-900 w-full h-full ${mostrarEdicaoConfirmada ? 'block' : 'hidden'}`}>
+                        <p>Post Editado com sucesso</p>
+                        <button onClick={terminarEdicao}>OK</button>
+                    </div>
             </div>
 
             <div className={`
