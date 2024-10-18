@@ -26,9 +26,7 @@ const GerenciarPosts: React.FC = () => {
     const [postSelecionado, setPostSelecionado] = useState<Post | null>(null)
 
     //logica para deletar post
-    const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
-
-    console.log(semPosts)
+    const { listaDePosts } = useListaDePostagens(reRenderizar);
     
 
     const [mostrarModal, setMostrarModal] = useState<boolean>(false);

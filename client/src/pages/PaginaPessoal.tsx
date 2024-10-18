@@ -10,7 +10,7 @@ const PaginaPessoal: React.FC = () => {
     //estado para mostrar gerenciar
     const [mostrarGerenciar, setMostrarGerenciar] = useState<boolean>(false)
     function clicouGerenciar() {
-        setMostrarGerenciar(true)
+        setMostrarGerenciar(prevValue => !prevValue) // toggle: true/false
     }
 
     const { id } = useParams();
