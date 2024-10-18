@@ -8,6 +8,7 @@ interface ContextOutlet {
     setReRenderizar: React.Dispatch<React.SetStateAction<number>>;
     clicouEmLinks: boolean;
     setClicouEmLinks: React.Dispatch<React.SetStateAction<boolean>>;
+    ultimoPost: string;
 }
 
 const NovoPost: React.FC = () => {
@@ -15,7 +16,7 @@ const NovoPost: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const {setReRenderizar, setClicouEmLinks} = useOutletContext<ContextOutlet>();
+    const {setReRenderizar, setClicouEmLinks, ultimoPost} = useOutletContext<ContextOutlet>();
 
     const [itemTitle, setItemTitle] = useState<string>();
     const [itemBody, setItemBody] = useState<string>();
@@ -88,9 +89,12 @@ const NovoPost: React.FC = () => {
         // Atualiza o estado que deve acionar a re-renderização
         setReRenderizar(prev => prev + 1);
 
-        navigate("/")
+        setTimeout(() => {
+            navigate(ultimoPost) // navegar para o post a recem criado
+        }, 1000);
+        
 
-        setClicouEmLinks(false)
+        
     }
 
     return (

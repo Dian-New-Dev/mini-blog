@@ -198,7 +198,7 @@ const Root: React.FC = () => {
                     
                     ">
                         {clicouEmLinks ?
-                        <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks }} />
+                        <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks, ultimoPost }} />
 
                         : <OutletPlaceHolder ultimoPost={ultimoPost}  />}
                         
