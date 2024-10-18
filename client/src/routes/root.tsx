@@ -23,6 +23,7 @@ const Root: React.FC = () => {
     const [reRenderizar, setReRenderizar] = useState<number>(0);
     useEffect(() => {
         //vazio, apenas para rerenderizar
+        //console.log('valor de rerenderizar = ' + reRenderizar)
     }, [reRenderizar])
 
     

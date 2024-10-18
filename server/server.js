@@ -110,6 +110,16 @@ connectToPostsCollection().then((collection) => {
 
     })
 
+    app.delete('/api/delete-post', async(req, res) => {
+        const id = req.query.id;
+        console.log(id)
+        try {
+            res.json({message: 'tudo certo'}) 
+        } catch(error) {
+            res.status(500).json({message: 'erro ao deletar o post', error: error.message});
+        }
+    })
+
 }).catch((error) => {
     console.error('Falha ao conectar ao MongoDB/posts:', error);
 });
