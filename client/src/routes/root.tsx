@@ -92,8 +92,15 @@ const Root: React.FC = () => {
                 items-start
                 "
                 >
-                    <Link onClick={linkClicado} to="/login">Login</Link>
+                    <div className={`${loginCtxt?.isUserLoggedIn ? 'hidden' : 'block'}`}>
+                                            <Link onClick={linkClicado} to="/login">Login</Link>
                     <Link onClick={linkClicado} to="/sign-up">Cadastre-se</Link>
+                    </div>
+
+                    <div className={`${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}`}>
+                        <button>Log Out </button>
+                    </div>
+
 
                     <button className="
                     bg-blue-600
@@ -117,7 +124,7 @@ const Root: React.FC = () => {
                 `}
                 >
 
-                    <MiniPerfil />  
+                    <MiniPerfil setClicouEmLinks={setClicouEmLinks} />  
                 </div>
 
                 <nav className="">

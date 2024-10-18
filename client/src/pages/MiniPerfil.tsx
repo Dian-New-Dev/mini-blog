@@ -2,7 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { UserNameContext } from '../context/userNameContext';
 import { Link } from 'react-router-dom';
 
-const MiniPerfil: React.FC = () => {
+
+interface Props {
+    setClicouEmLinks: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MiniPerfil: React.FC<Props> = ({setClicouEmLinks}) => {
     
     //contexto para saber nome de usuario
     const usuarioCtxt = useContext(UserNameContext)
@@ -10,8 +15,10 @@ const MiniPerfil: React.FC = () => {
     //estado para armazenar endereço da foto de perfil
     const [fotoDePerfil, setFotoDePerfil] = useState<string>('')
 
+
+
     function clicouNoNome() {
-        
+        setClicouEmLinks(true)
     }
     
     
