@@ -57,7 +57,7 @@
 - localStorage: perfil de usuario
 - se login, renderizar um componente no root exibindo perfil do usuário logado (quem sou eu, foto, etc)
 
-### Problema: como transitar do localStorage para um banco de dados de posts e usuários
+### Problema: como transitar do localStorage para um banco de dados de posts e usuários (resolvido)
 
 - armazenamento em local storage é provisório
 - usar MongoDB
@@ -132,16 +132,6 @@ Essas alterações garantiram que a renderização de ListaDePostagens estivesse
 6) useNavigate (hook do react router) permite "forçar" a aplicação a acessar um link específico após determinado evento.
 
 7) params, funcionalidade do react router, permite formar links dinâmicos.
-
-## Continuidade
-
-- posts agora sao linkados a usuarios
-
-- lista de posts so aparece se houver usuario logado e se usuario ja fez algum post
-
-- oferecer link para usuario deslogar
-
-- oferecer forma do usuario editar e/ou deletar posts
 
 ## Backend
 
