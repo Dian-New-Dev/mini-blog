@@ -119,7 +119,7 @@ const Root: React.FC = () => {
 
             <video autoPlay loop className={`${clicouEmEntrar ? 'block' : 'hidden'}  z-0 absolute w-full h-full top-0 left-0 background-universo`} src={`/assets/videos/video.mp4`} ref={videoRef}></video>
 
-            <div className={`${clicouEmEntrar ? 'block' : 'hidden'}`}>
+            <div className={`${clicouEmEntrar ? 'block' : 'hidden'} flex flex-col flex-grow`}>
                 <div id="titulo" className="bg-black relative z-30 w-[95%] h-full
                 flex flex-col gap-6 items-center p-12 border-b-2 border-white/25 mb-4 mx-auto  ">
                     <Link to={`/`} onClick={clicouEmBleg} className="">
@@ -129,7 +129,7 @@ const Root: React.FC = () => {
                     </Link>
 
                     <h2 className="text-2xl">
-                        O corriqueiro aos olhos daquele que a tudo já viu
+                        O CORRIQUEIRO AOS OLHOS DO ESTRANHO
                     </h2>
                     
 
