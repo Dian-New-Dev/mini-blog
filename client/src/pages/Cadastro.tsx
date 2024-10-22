@@ -136,28 +136,30 @@ const Registrar: React.FC = () => {
 
     return (
         <div className="outlet-components">
-        <div className='
+        <div className='plano-de-fundo-tela
+        p-8
         flex
         flex-col
         gap-4
         w-full
-        h-fit
+        h-full
         items-center'>
-            <h4 className='
+            <h3 className='
             text-3xl font-bold
             '>
                 Cadastre-se
-            </h4>
+            </h3>
         
             <form className='
-            bg-green-400
+            bg-green-500
             w-1/2
             p-4
             flex
             flex-col
             items-center
             gap-4
-            h-fit'
+            h-fit
+            rounded-lg'
             onSubmit={handleSubmit}>
                 <label className={`
                 text-sm
@@ -202,15 +204,12 @@ const Registrar: React.FC = () => {
 
 
 
-                <button className='
-                bg-green-800
-                w-[200px]
-                py-2
-                font-bold
-                text-green-100
-                hover:bg-green-900'
+                <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold'
                 type='submit'>
-                    Cadastrar
+                    <p>
+                        Cadastrar
+                    </p>
+                    
                 </button>
             
             </form>

@@ -33,39 +33,29 @@ const PaginaPessoal: React.FC = () => {
     }
 
     return (
-        <div>
-            <div>
-                <h1>Olá, esta é sua página pessoal, {id}</h1>
-                <p>Vamos postar sobre o que hoje?</p>
+        <div className='p-8 plano-de-fundo-tela flex flex-col gap-8'>
+            <div className='flex flex-col gap-8'>
+                <h3 className='text-xl '>
+                    Olá, esta é sua página pessoal, {id}.
+                </h3>
+                <p>
+                    Vamos postar sobre o que hoje?
+                </p>
             </div>
 
-            <div>
-                <button className="
-                        bg-blue-600
-                        p-2
-                        border
-                        border-gray-700
-                        hover:bg-blue-800
-                        hover:scale-110
-                        font-bold"
-                        
-                        >
-                            <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
-                                Novo Post
-                            </Link>
+            <div className='flex gap-4'>
+                <button className="bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold">
+                    <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
+                        <p>
+                            Novo Post
+                        </p>
+                    </Link>
                 </button >
 
-                <button className="
-                        bg-blue-600
-                        p-2
-                        border
-                        border-gray-700
-                        hover:bg-blue-800
-                        hover:scale-110
-                        font-bold"
-                        onClick={clicouGerenciar}
-                        >
-                            Gerenciar Posts
+                <button onClick={clicouGerenciar} className="bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold">
+                    <p>
+                        Gerenciar Posts
+                    </p>
                 </button>
             </div>
 

@@ -9,7 +9,9 @@ const OutletPlaceHolder: React.FC = () => {
 
     return (
         <div>
-            Este é o placeholder, bem vindo!
+            <p>
+                Este é o placeholder, bem vindo!
+            </p>
         </div>
     );
 

@@ -150,74 +150,70 @@ const GerenciarPosts: React.FC = () => {
     
 
     return (
-        <div className='relative'>
+        <div className='relative flex flex-col gap-4'>
 
-            <div className={`
+            <div id='edição' className={`
                 ${mostrarModalEdicao ? 'block' : 'hidden'}
                 grid
                 place-items-center
-                w-screen
-                h-screen
+                w-full
+                h-full
                 z-50
+                relative
                 `}>
 
-                    <div className={`bg-red-900 w-full h-full ${mostrarEdicaoConfirmada ? 'hidden' : 'block'}`}>
+                    <div className={`bg-gray-950 w-full h-full ${mostrarEdicaoConfirmada ? 'hidden' : 'block'}`}>
                         <form className='
                             w-full
                             h-full
                             flex
                             flex-col
-                            gap-2' 
+                            gap-2
+                            p-4
+                            ' 
                             onSubmit={handleSubmit}>
-                                <label htmlFor="titulo">Título</label>
-                                <input className='text-green-950 p-2'
+                                <label htmlFor="titulo">
+                                    <p>
+                                        Título
+                                    </p>
+                                </label>
+                                <input className='text-green-200 p-2 bg-green-900'
                                 value={itemTitle}
                                 onChange={handleInputTitle} type="text" name='titulo' id="titulo"/>
                                 
-                                <label htmlFor="novo-post">Texto</label>
+                                <label htmlFor="novo-post">
+                                    <p>
+                                        Texto
+                                    </p>
+                                </label>
                                 <textarea className='
                                 flex-grow
-                                text-green-950
+                                text-green-200
+                                bg-green-900
                                 p-2
-                                
+                                h-[500px]
                                 '
                                 value={itemBody}
                                 onChange={handleInputBody} name="novo-post" id="novo-post" />
                                 
                             
-                                <button className='
-                                bg-blue-600
-                                p-2
-                                border
-                                border-gray-700
-                                hover:bg-blue-800
-                                w-[200px]
-                                mx-auto
-                                font-bold
-                                mt-1
-                                
-                                '
+                                <button className='mb-16 bg-[#174936] w-[200px] mx-auto rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold'
                                 type='submit'>
-                                    Postar</button>
+                                    <p>
+                                        Postar
+                                    </p>
+                                </button>
+
 
 
                         </form>
-                        <button className='
-                                bg-blue-600
-                                p-2
-                                border
-                                border-gray-700
-                                hover:bg-blue-800
-                                w-[200px]
-                                mx-auto
-                                font-bold
-                                mt-1
-                                
-                                '
-                                onClick={() => setMostrarModdalEdicao(false)}>
-                                    Cancelar
 
-                                </button>
+                        <button onClick={() => setMostrarModdalEdicao(false)} className='centralizar-horizontal absolute bottom-6 bg-[#174936] w-[200px] mx-auto rounded-lg p-2 border border-gray-700 hover:bg-green-950 font-bold'>
+                            <p>
+                                Cancelar
+                            </p>
+                        </button>
+
                     </div>
 
                     <div className={`bg-red-900 w-full h-full ${mostrarEdicaoConfirmada ? 'block' : 'hidden'}`}>
@@ -226,51 +222,55 @@ const GerenciarPosts: React.FC = () => {
                     </div>
             </div>
 
-            <div className={`
-                ${mostrarModal ? 'block' : 'hidden'}
-                absolute
-                top-0
-                left-0
-                grid
-                place-items-center
-                bg-gray-950/50
-                `}>
-                <div className='
-                w-[300px]
-                h-[300px]
-                bg-green-950
-                p-4'>
-                    <p>Esta ação não poderá ser revertida. Tem certeza
-                        de que deseja apagar este post?
+            <div id='deleção' className={`${mostrarModal ? 'block' : 'hidden'} absolute top-0 left-0 grid place-items-center`}>
+                <div className='text-center flex flex-col gap-4 bg-gray-950 w-full h-full p-8 rounded-lg'>
+                    
+                    <p className='text-red-700'>Esta ação não poderá ser revertida.</p>
+                    <p>Tem certeza de que deseja apagar este post?
                     </p>
-                    <div className='flex gap-4'>
-                        <button onClick={() => clickModal(0)}>Sim</button>
-                        <button onClick={() => clickModal(1)}>Cancelar</button>
+                    
+                    <div className='flex flex-col justify-center gap-4'>
+                        <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold' onClick={() => clickModal(0)}>
+                            <p>
+                                Sim    
+                            </p>
+                        </button>
+                        <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold' onClick={() => clickModal(1)}>
+                            <p>
+                                Cancelar    
+                            </p>
+                        </button>
                     </div>
                 </div>
 
             </div>
 
-            <p>Seus posts</p>
+            <h3 className='text-xl'>
+                Seus posts
+            </h3>
 
-            <div className=''>
+            <div className='flex flex-col gap-4'>
                 {
                     listaDePosts.map((item, index) => (
-                        <div key={index} className='border bg-green-950 text-green-200 flex'>
-                            <div className='w-[80%]'>
+                        <div key={index} className=' bg-green-950/25 text-green-200 flex'>
+                            <div className='w-[80%] p-4 flex flex-col justify-center gap-4'>
                                 <div className='hover:underdivne hover:scale-105 hover:text-green-300'>
                                     <NavLink to={`/post/${item.titulo}`}>
-                                        {item.titulo}
+                                        <p className='text-lg underline'>
+                                            {item.titulo}
+                                        </p>
                                     </NavLink>
                                 </div>
                                 <div>
-                                    {item.corpo}
+                                    <p className='pl-1'>
+                                        {item.corpo}
+                                    </p>
                                 </div>
                                 
                             </div>
-                            <div className='flex gap-4 w-[20%]'>
-                                <button onClick={() => apagarPost(item)}>Apagar</button>
-                                <button onClick={() => editarPost(item)}>Editar</button>
+                            <div className='flex flex-col gap-4 w-[20%]'>
+                                <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold' onClick={() => apagarPost(item)}>Apagar</button>
+                                <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold' onClick={() => editarPost(item)}>Editar</button>
                             </div>
                         
                         </div>

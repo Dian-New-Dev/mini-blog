@@ -81,7 +81,7 @@ const Login: React.FC = () => {
     },[loginGreenlit, navigate] );  
 
     return (
-        <div className="outlet-components">
+        <div className="outlet-components plano-de-fundo-tela">
             <div className='
             flex
             flex-col
@@ -89,21 +89,22 @@ const Login: React.FC = () => {
             w-full
             items-center
             '>
-                <h4 className='
+                <h3 className='
                 text-3xl font-bold
                 '>
                     Login de Usuário
-                </h4>
+                </h3>
             
                 <form className='
-                bg-green-400
+                bg-green-500
                 w-1/2
                 p-4
                 flex
                 flex-col
                 items-center
                 gap-4
-                flex-grow' 
+                flex-grow
+                rounded-lg' 
                 onSubmit={handleSubmit}
                 >
 
@@ -152,29 +153,27 @@ const Login: React.FC = () => {
                             <input type="checkbox" name="lembrar-senha" id="lembrar-senha" />
                             <p className='text-sm'>Lembrar</p>
                         </div>
+
                         <div className='w-1/2 text-right'>
-                            <a className='text-sm' href="#">Esqueceu a senha?</a>
+                            <a className='text-sm' href="#">
+                                <p>
+                                    Esqueceu a senha?
+                                </p>
+                                   
+                            </a>
                         </div>
-
-
                     </div>
 
-                    <button className='
-                    bg-green-800
-                    w-[200px]
-                    py-2
-                    font-bold
-                    text-green-100
-                    hover:bg-green-900'
-                    type='submit'
-                    >
-                        Entrar
+                    <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold' type='submit'>
+                        <p>
+                            Entrar
+                        </p> 
                     </button>
                 
                 </form>
 
                 <div className='
-                bg-green-400
+                bg-green-500
                 w-1/2
                 p-4
                 flex
@@ -182,18 +181,14 @@ const Login: React.FC = () => {
                 items-center
                 gap-4
                 flex-grow
+                rounded-lg
                 '>
                     <p className='font-bold'>Não possui conta?</p>
                     <Link to={"/sign-up"}>
-                        <button className='
-                    bg-green-800
-                    w-[200px]
-                    py-2
-                    font-bold
-                    text-green-100
-                    hover:bg-green-900
-                    '>
-                            Cadastre-se
+                        <button className='bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold'>
+                            <p>
+                                Cadastre-se
+                            </p>
                         </button>
                     </Link>
                 </div>

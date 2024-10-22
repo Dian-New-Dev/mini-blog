@@ -44,28 +44,25 @@ const ListaDePostagens: React.FC<ListaDePostagensProps> = ({ reRenderizar, setCl
         flex
         flex-col
         gap-2
-        border
-        border-green-200
-        
-        bg-green-900
         items-start
         '>
 
             <div className='
             p-4 
-            border-b
+            border-t-2
             w-full
-            border-white/50
+            border-white/25
             '>
-                <p className='
+                <h3 className='
                 font-bold
                 leading-4
+                text-xl
                 
                 '>
-                    Ordenadas desordens mentais</p>
+                    Logs de Navegação</h3>
             </div>
 
-            {<ul className='p-4 px-8 flex flex-col gap-2 list-disc'>
+            {<ul className='p-4 pl-10 px-8 flex flex-col gap-2 list-disc'>
                 {semPosts ? (
                     'Sem posts por enquanto. Quel tal começar a postar?'
                 ) : (

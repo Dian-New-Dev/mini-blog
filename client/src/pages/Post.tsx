@@ -28,37 +28,23 @@ const Post: React.FC = () => {
     
     
     return (
-        <div className='
-        w-full
-        h-full
-        
-        flex
-        flex-col
-        gap-8
-        text-green-200
-        p-12
-        bg-green-950
-        border-4
-        border-double
-        border-green-200
-        
-        '>
+        <div className='w-full h-full flex flex-col gap-8'>
 
-            <div id='titulo-container'>
-                <h2 className='
-                text-3xl
-                font-bold
-                '>
-                    {titulo}</h2>
-            </div>
+                <div className="px-4 py-2 relative plano-de-fundo-tela" id="post-titulo">
+                    <div className="w-[30px] h-[30px] clip-path-titulo-1 absolute left-0 top-0"></div>
+                    <div className="w-[30px] h-[30px] clip-path-titulo-2 absolute right-0 bottom-0"></div>
+                    <h3 className="text-3xl italic">{titulo}</h3>
+                    <div className="text-right">
+                        <p className="italic">Autor:</p>
+                        <p className="italic">Data:</p>
+                    </div>
+                </div>
 
-            <div id='corpo-container' className=''>
-                <p className='
-                whitespace-pre-line	
-                leading-7
-                '>
-                    {corpo}</p>
-            </div>
+                <div id="post-corpo" className="leading-8 p-8 plano-de-fundo-tela relative">
+                    <div className="w-[30px] h-[30px] clip-path-titulo-1 absolute left-0 top-0"></div>
+                    <div className="w-[30px] h-[30px] clip-path-titulo-2 absolute right-0 bottom-0"></div>
+                    <p>{corpo}</p>
+                </div>
             
            
            
