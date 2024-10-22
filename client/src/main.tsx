@@ -59,7 +59,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <LoginContextProvider>
             <UserNameContextProvider>
-                <div className='w-full overflow-hidden'>
+                <div className='w-full overflow-hidden bg-black'>
                     <RouterProvider router ={router} />
                 </div>
                 

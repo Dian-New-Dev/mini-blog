@@ -14,17 +14,20 @@ import TesteAPI from "../pages/TesteAPI";
 
 const Root: React.FC = () => {
 
+    //logica renderização inicial
+    const [clicouEmEntrar, setClicouEmEntrar] = useState<boolean>(false)
+
     //lógica do video
     const videoRef = useRef<HTMLVideoElement>(null)
 
     const rodarVideo = () => {
         if (videoRef.current) {
-            console.log(videoRef.current); // Verifique a referência do vídeo
             videoRef.current.play().catch((error) => console.error('Erro ao reproduzir o vídeo:', error));
         }
+        setClicouEmEntrar(true)
     };
 
-    function iniciarVideo() {
+    function abrirSite() {
         rodarVideo();
     }
 
@@ -64,90 +67,134 @@ const Root: React.FC = () => {
     
     
     return (
-        <div className="w-full max-w-[1400px] mx-auto h-full flex flex-col min-h-screen relative ">
+        <div className="w-full max-w-[1400px] mx-auto h-full flex flex-col min-h-screen relative text-center">
 
-            <div className="absolute top-0 left-0 z-20">
-                <button className="text-white z-10" onClick={iniciarVideo}>
-                    iniciarVideo
-                </button>
-            </div>
+            <div id="primeira-tela" className={`${clicouEmEntrar ? 'hidden' : 'block'} absolute top-0 left-0 w-full h-screen grid place-content-center bg-black z-20`}>
+                <div className="flex w-1/2 h-full plano-de-fundo-tela border-2 border-white/25 rounded-lg mx-auto p-4">
+                    <div className="w-1/2 flex flex-col gap-2 p-4">
+                        <h3 className="text-2xl">Bem-Vindo!</h3>
+                        <p>
+                            Este blog é um projeto pessoal
+                            full-stack feito para integrar meu
+                            portfolio web-dev. 
+                        </p>
+                        <p>
+                            Clique no botão abaixo para visitar
+                            o blog em português.
+                        </p>
 
-            <video autoPlay loop className="z-0 absolute w-full h-full top-0 left-0 background-universo" src={`/assets/videos/video.mp4`} ref={videoRef}></video>
+                        <button className="bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold" onClick={abrirSite}>
+                            <p>
+                                Entrar
+                            </p>
+                        </button>
+                    </div>
 
-            <div id="titulo" className="bg-black relative z-30 w-[95%] h-full
-            flex flex-col gap-6 items-center p-12 border-b-2 border-white/25 mb-4 mx-auto  ">
-                <Link to={`/`} onClick={clicouEmBleg} className="">
-                    <h1 className="text-5xl scale-150">
-                        Infinita Tenebrae
-                    </h1>
-                </Link>
+                    <div className="w-[2px] bg-white/25"></div>
 
-                <h2 className="text-2xl">
-                    O corriqueiro aos olhos daquele que a tudo já viu
-                </h2>
+                    <div className="w-1/2 flex flex-col gap-2 p-4">
+                        <h3 className="text-2xl">Welcome!</h3>
+                        <p>
+                            This is a personal full-stack
+                            project developed to be part of my
+                            web developer portfolio page.
+                        </p>
+                        <p>
+                            Click the button below to visit
+                            this website in English.
+                        </p>
+
+                        <button className="bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold" onClick={abrirSite}>
+                            <p>
+                                Enter
+                            </p>
+                        </button>
+                    </div>
+                </div>
                 
 
-
             </div>
 
-            <div id="main-container" className="flex-grow w-full h-full flex gap-8 p-8">
-                <div id="sidebar" className="plano-de-fundo-tela relative z-10 w-[25%] min-w-[300px] p-8 flex-grow text-green-200 flex flex-col gap-4">
-                    <div id='painel-usuario' className="flex flex-col gap-2 border-b-2 border-white/25  p-4 items-start">
-                        <h3 className="font-bold text-xl">Painel de Controle</h3>
-                        <div className={`flex flex-col gap-2 pl-3 ${loginCtxt?.isUserLoggedIn ? 'hidden' : 'block'}`}>
-                            <Link onClick={linkClicado} to="/login">
-                                <p>Login</p>
-                            </Link>
-                            <Link onClick={linkClicado} to="/sign-up">
-                                <p>Cadastre-se</p>
-                            </Link>
-                        </div>
-
-                        <div className={`pl-3 ${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}`}>
-                            <button>Log Out </button>
-                        </div>
 
 
-                        <button onClick={linkClicado} className="bg-[#174936] rounded-lg ml-3 p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold">
-                            <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
-                                <p>Novo Post</p>
-                            </Link>
-                        </button>
+            <video autoPlay loop className={`${clicouEmEntrar ? 'block' : 'hidden'}  z-0 absolute w-full h-full top-0 left-0 background-universo`} src={`/assets/videos/video.mp4`} ref={videoRef}></video>
 
-                    </div>
+            <div className={`${clicouEmEntrar ? 'block' : 'hidden'}`}>
+                <div id="titulo" className="bg-black relative z-30 w-[95%] h-full
+                flex flex-col gap-6 items-center p-12 border-b-2 border-white/25 mb-4 mx-auto  ">
+                    <Link to={`/`} onClick={clicouEmBleg} className="">
+                        <h1 className="text-5xl scale-150">
+                            Infinita Tenebrae
+                        </h1>
+                    </Link>
 
-                    <div id="perfil-container" className={`
-                    ${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}
-                    `}
-                    >
+                    <h2 className="text-2xl">
+                        O corriqueiro aos olhos daquele que a tudo já viu
+                    </h2>
+                    
 
-                        <MiniPerfil setClicouEmLinks={setClicouEmLinks} />  
-                    </div>
 
-                    <nav className="">
-                        <ul>
-                            {loginCtxt?.isUserLoggedIn && <ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} setUltimoPost={setUltimoPost} />}
-                        </ul>
-                    </nav>
                 </div>
 
-                <div id="outlet" className=" flex flex-col flex-grow w-[75%] h-full z-10">
-                        {clicouEmLinks ?
-                        <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks, ultimoPost }} />
+                <div id="main-container" className="flex-grow w-full h-full flex gap-8 p-8">
+                    <div id="sidebar" className="plano-de-fundo-tela relative z-10 w-[25%] min-w-[300px] p-8 flex-grow text-green-200 flex flex-col gap-4">
+                        <div id='painel-usuario' className="flex flex-col gap-2 border-b-2 border-white/25  p-4 items-start">
+                            <h3 className="font-bold text-xl">Painel de Controle</h3>
+                            <div className={`flex flex-col items-start gap-2 pl-3 ${loginCtxt?.isUserLoggedIn ? 'hidden' : 'block'}`}>
+                                <Link onClick={linkClicado} to="/login">
+                                    <p>Login</p>
+                                </Link>
+                                <Link onClick={linkClicado} to="/sign-up">
+                                    <p>Cadastre-se</p>
+                                </Link>
+                            </div>
 
-                        : <OutletPlaceHolder ultimoPost={ultimoPost}  />}
-                        
-                        
+                            <div className={`pl-3 ${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}`}>
+                                <button>Log Out </button>
+                            </div>
+
+
+                            <button onClick={linkClicado} className="bg-[#174936] rounded-lg ml-3 p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold">
+                                <Link to={loginCtxt?.isUserLoggedIn ? `/novo-post` : '/login'}>
+                                    <p>Novo Post</p>
+                                </Link>
+                            </button>
+
+                        </div>
+
+                        <div id="perfil-container" className={`
+                        ${loginCtxt?.isUserLoggedIn ? 'block' : 'hidden'}
+                        `}
+                        >
+
+                            <MiniPerfil setClicouEmLinks={setClicouEmLinks} />  
+                        </div>
+
+                        <nav className="">
+                            <ul>
+                                {loginCtxt?.isUserLoggedIn && <ListaDePostagens reRenderizar={reRenderizar} setClicouEmLinks={setClicouEmLinks} setUltimoPost={setUltimoPost} />}
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div id="outlet" className=" flex flex-col flex-grow w-[75%] h-full z-10">
+                            {clicouEmLinks ?
+                            <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks, ultimoPost }} />
+
+                            : <OutletPlaceHolder ultimoPost={ultimoPost}  />}
+                            
+                            
+                    </div>
                 </div>
-            </div>
 
-            <div id="outlet-footer-container" className="relative z-10 flex flex-col h-full justify-between gap-4 mx-auto bottom-0">
-                <div className="p-4 text-center">
-                    <a target="_blank" href="https://www.linkedin.com/in/diego-antunes-339648293/">
-                        <p>
-                            DA Web Dev - 2024
-                        </p>
-                    </a>
+                <div id="outlet-footer-container" className="relative z-10 flex flex-col h-full justify-between gap-4 mx-auto bottom-0">
+                    <div className="p-4 text-center">
+                        <a target="_blank" href="https://www.linkedin.com/in/diego-antunes-339648293/">
+                            <p>
+                                DA Web Dev - 2024
+                            </p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
