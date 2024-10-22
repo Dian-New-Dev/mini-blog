@@ -64,7 +64,7 @@ const Root: React.FC = () => {
     
     
     return (
-        <div className="w-full max-w-[1400px] mx-auto h-full flex flex-col min-h-screen relative overflow-hidden ">
+        <div className="w-full max-w-[1400px] mx-auto h-full flex flex-col min-h-screen relative ">
 
             <div className="absolute top-0 left-0 z-20">
                 <button className="text-white z-10" onClick={iniciarVideo}>
