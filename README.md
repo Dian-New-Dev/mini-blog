@@ -2,7 +2,7 @@
 
 ## Descrição
 
-- Pequeno projeto pessoal para aprendizado da ferramente react router.
+- Pequeno projeto pessoal para aprendizado das seguintes ferramentas e conceitos:react router, Node.JS, Express, full-stack, backend, MongoDB. 
 - Objetiva-se como um blog simples.
 
 ## Funcionalidades pretendidas:
@@ -13,9 +13,16 @@
 4) Capacidade de criar novo post - feito;
 5) Navbar atualiza-se a cada novo post - feito;
 6) Cadastro de usuario e senha - feito;
-7) Cadastrar e-mail envia e-mail para o usuário;
-8) Passar logica de autenticação e user generated data para backend;
-9) Passar lógica de armazenamento de dados para backend;
+7) Cadastrar e-mail envia e-mail para o usuário; - a fazer
+8) Passar logica de autenticação e user generated data para backend; - feito
+9) Passar lógica de armazenamento de dados para backend; - feito
+10) Usuario pode editar perfil, incluindo foto - a fazer;
+11) Posts registram data e horario em que foram submetidos - a fazer;
+12) Implementar middleware de autenticação PassportJS - a fazer;
+13) Exibir usuarios com postagens na tela inicial - a fazer;
+14) Implementar comentários nos postas - a fazer;
+15) Implementar design espacial, cósmico - feito;
+16) Implementar opção para visitar o blog em inglês - a fazer;
 
 
 ## Tech stack:
@@ -25,6 +32,11 @@
 - Typsecript
 - Tailwind
 - React Router
+- NodeJS
+- Express
+- PassportJS (a implementar)
+- MongoDB
+- Docker (a implementar)
 
 ## Mapeamento de problemas
 
@@ -56,6 +68,7 @@
 - componente pessoal: edição de postagens (adicionar, deletar posts) e descrição de perfil
 - localStorage: perfil de usuario
 - se login, renderizar um componente no root exibindo perfil do usuário logado (quem sou eu, foto, etc)
+- deprecado
 
 ### Problema: como transitar do localStorage para um banco de dados de posts e usuários (resolvido)
 
@@ -65,6 +78,7 @@
 ### Problema: como alcançar um design moderno
 
 - design atual é feio e antiquado
+- relativente resolvido: implementado design com temática espacial. Algumas melhorias necessárias.
 
 ## Aprendizado
 
@@ -145,6 +159,7 @@ Essas alterações garantiram que a renderização de ListaDePostagens estivesse
 
 ## Aprendizado backend:
 
+
 - server.js costuma ser a API, o ponto de entrada por onde o ambiente backend começa
 
 - estava com um problema onde o frontend não conseguir pegar (fetch) os dados do backend. A solução foi trocar a url do fetch, de "/api" para o link direto "http://localhost:5000".
@@ -199,3 +214,7 @@ Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse 
     }
 ```
 
+## Status atual:
+
+- Projeto pronto no ambiente local.
+- Em necessidade de dockerização para deploy.
