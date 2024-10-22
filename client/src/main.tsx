@@ -59,7 +59,10 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <LoginContextProvider>
             <UserNameContextProvider>
-                <RouterProvider router ={router} />
+                <div className='bg-black'>
+                    <RouterProvider router ={router} />
+                </div>
+                
             </UserNameContextProvider>
         </LoginContextProvider>
     </StrictMode>,
