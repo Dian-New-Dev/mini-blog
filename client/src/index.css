@@ -22,3 +22,114 @@
 .borda-de-erro {
     border: 2px solid #ef4444;
 }
+
+@font-face {
+    font-family: 'stalker1';
+    src: url('./public/stalker1.ttf')
+
+}
+
+@font-face {
+    font-family: 'Asteroid';
+    src: url('./public/PilotCommand3DItalic-ZVXoB.otf');
+
+}
+
+@font-face {
+    font-family: 'chopsick';
+    src: url('./public/AwakenningPersonalUse-DOLPD.ttf');
+
+}
+
+h1 {
+    font-family: 'chopsick';
+    color: #174936;
+
+}
+
+h2 {
+    font-family: 'stalker1';
+    color: #174936;
+    font-weight: 900;
+}
+
+p, li {
+    font-family: 'stalker1';
+    color: #c6fcc6;
+    font-weight: 400;
+
+}
+
+h3 {
+    font-family: 'Stalker1';
+    color: #174936;
+    font-weight: 900;
+
+}
+
+.background-universo {
+    background-color: black;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    scale: 2;
+}
+
+.formato-div-titulo {
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 80% 61%, 59% 70%, 35% 70%, 14% 57%, 0% 30%);
+
+
+
+}
+
+
+.pfp {
+    position: relative;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+    background-image: url('./public/placeholder-pfp.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: hue-rotate(100deg) contrast(1.2);
+}
+
+.pfp::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+.plano-de-fundo-tela {
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 243, 21, 0.1),
+        rgba(0, 0, 0, 0.1) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+
+
+.clip-path-titulo-1 {
+    clip-path: polygon(0 0, 100% 0, 100% 9%, 13% 9%, 13% 100%, 0 100%);
+    background-color: rgba(255, 255, 255, 0.295);
+    border-radius: 5px;
+}
+
+.clip-path-titulo-2 {
+    clip-path: polygon(0 0, 100% 0, 100% 9%, 13% 9%, 13% 100%, 0 100%);
+    transform: rotate(180deg);
+    background-color: rgba(255, 255, 255, 0.295);
+    border-radius: 5px;
+
+}
+
