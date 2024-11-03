@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -71,8 +71,8 @@ const Registrar: React.FC = () => {
 
     
     //verificao de e-mail e senha
-    const [erroEmail, setErroEmail] = useState<boolean>(false);
-    const [erroSenha, setErroSenha] = useState<boolean>(false);
+    const [erroEmail] = useState<boolean>(false);
+    const [erroSenha] = useState<boolean>(false);
     // function verificarDados(preCadastro) {
     //     // Inicializa as variáveis de erro locais
     //     let localErroEmail = false;

@@ -16,7 +16,7 @@ const NovoPost: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const {setReRenderizar, setClicouEmLinks, ultimoPost} = useOutletContext<ContextOutlet>();
+    const {setReRenderizar, ultimoPost} = useOutletContext<ContextOutlet>();
 
     const [itemTitle, setItemTitle] = useState<string>();
     const [itemBody, setItemBody] = useState<string>();

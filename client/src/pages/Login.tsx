@@ -5,14 +5,6 @@ import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
 import { UserNameContext } from '../context/userNameContext';
 
-interface usuarios {
-    correio: string;
-    usuario: string;
-    senha1: string;
-    senha2: string;
-    length: number;
-}
-
 const Login: React.FC = () => {
 
     //para levar o usuario a pagina pessoal se login OK
@@ -58,7 +50,7 @@ const Login: React.FC = () => {
             });
 
             if(response.ok) {
-                const result = await response.json();
+                //const result = await response.json();
                 setLoginGreenLit(true)
             } else {
                 console.error('Login não foi bem sucedido', response.statusText)

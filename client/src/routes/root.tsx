@@ -2,14 +2,10 @@
 import React, {useEffect, useState, useRef} from "react";
 import { Outlet, Link } from "react-router-dom";
 import ListaDePostagens from "../pages/ListaDePostagens";
-import UltimoPost from "../pages/OutletPlaceHolder";
-
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
 import MiniPerfil from "../pages/MiniPerfil";
 import OutletPlaceHolder from "../pages/OutletPlaceHolder";
-import TesteAPI from "../pages/TesteAPI";
-
 
 
 const Root: React.FC = () => {
@@ -181,7 +177,7 @@ const Root: React.FC = () => {
                             {clicouEmLinks ?
                             <Outlet context={{ reRenderizar, setReRenderizar, clicouEmLinks, setClicouEmLinks, ultimoPost }} />
 
-                            : <OutletPlaceHolder ultimoPost={ultimoPost}  />}
+                            : <OutletPlaceHolder   />}
                             
                             
                     </div>

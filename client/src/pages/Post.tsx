@@ -4,7 +4,9 @@ import { useListaDePostagens } from '../hooks/useListaDePostagens';
 
 const Post: React.FC = () => {
 
-    const { listaDePosts, semPosts } = useListaDePostagens();
+    const reRenderizar = 0;
+
+    const { listaDePosts, semPosts } = useListaDePostagens(reRenderizar);
 
     const [corpo, setCorpo] = useState<string>('');
 
