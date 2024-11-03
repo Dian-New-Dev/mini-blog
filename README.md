@@ -218,3 +218,23 @@ Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse 
 
 - Projeto pronto no ambiente local.
 - Em necessidade de dockerização para deploy.
+
+## Dockerização
+
+- Iniciar aplicação:
+
+```
+docker-compose up
+```
+
+- Parar aplicação
+
+```
+docker-compose down
+```
+
+- Remontar imagens se código for alterado (não precisa parar aplicação, esse comando já faz isso)
+
+```
+docker-compose up --build
+```
