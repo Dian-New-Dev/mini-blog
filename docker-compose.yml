@@ -1,20 +1,14 @@
-version: '3.8'
-
 services:
-  backend:
-    image: mini-blog-backend
-    build:
-      context: ./server
-    ports:
-      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
-    environment:
-      - NODE_ENV=production
-
   frontend:
-    image: mini-blog-frontend
     build:
       context: ./client
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"  # Map port 3000 of the container to port 3000 on the host
-    environment:
-      - NODE_ENV=production
+      - "3000:80" # Maps port 80 in the container to port 3000 on the host
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Maps port 5000 in the container to port 5000 on the host

@@ -1,26 +1,16 @@
-# Use an official Node.js image as the base
-FROM node:18
+# Dockerfile for client
 
-# Set the working directory inside the container
+# Build the application
+FROM node:16 AS build
+
 WORKDIR /app
-
-# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the rest of the client code into the container
 COPY . .
-
-# Build the React app for production
 RUN npm run build
 
-# Install a simple server to serve the built app
-RUN npm install -g serve
-
-# Expose the port the app runs on (default for serve)
-EXPOSE 3000
-
-# Start the app
-CMD ["serve", "-s", "build"]
+# Serve the application with Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
