@@ -1,5 +1,11 @@
+require('dotenv').config();
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://diannewdev:dianPass@mini-blog.a7q0u.mongodb.net/?retryWrites=true&w=majority&appName=mini-blog";
+const uri = process.env.MongoDB_URI
+
+if (!uri) {
+  throw new Error("MongoDB URI is not defined in the environment variables.");
+}
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {

@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   frontend:
     build:
@@ -10,5 +12,9 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    env_file:
+      - .env  # Make sure this is properly indented
+    environment:
+      - MongoDB_URI=${MongoDB_URI}  # Ensure this matches the variable in your .env
     ports:
       - "5000:5000" # Maps port 5000 in the container to port 5000 on the host

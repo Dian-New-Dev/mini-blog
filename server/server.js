@@ -4,6 +4,8 @@ const { connectToUsersCollection, connectToPostsCollection } = require('./mongo'
 const bodyParser = require('body-parser');
 const app = express();
 const { ObjectId } = require('mongodb');
+require('dotenv').config();
+
 
 app.use(cors());
 app.use(bodyParser.json());
