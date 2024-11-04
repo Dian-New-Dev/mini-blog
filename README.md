@@ -1,8 +1,9 @@
-# Mini Bleg
+# Blog: Infinita Tenebrae
 
 ## Descrição
 
-- Pequeno projeto pessoal para aprendizado das seguintes ferramentas e conceitos:react router, Node.JS, Express, full-stack, backend, MongoDB. 
+- Inicialmente idealizado como um pequeno projeto pessoal para aprendizado de React Router.
+- Paulatinamente cresceu em objetivos e complexidade, tornando-se um projeto full-stack.
 - Objetiva-se como um blog simples.
 
 ## Funcionalidades pretendidas:
@@ -36,7 +37,7 @@
 - Express
 - PassportJS (a implementar)
 - MongoDB
-- Docker (a implementar)
+- Docker
 
 ## Mapeamento de problemas
 
@@ -80,7 +81,7 @@
 - design atual é feio e antiquado
 - relativente resolvido: implementado design com temática espacial. Algumas melhorias necessárias.
 
-## Aprendizado
+## Aprendizado (moverei este conteúdo em breve)
 
 1) Estava incorendo no seguinte problema: a cada montagem ou atualização de página, o componente NovoPost resetava os dados salvos no local storage. Isso ocorria por causa da seguinte função
 
@@ -216,10 +217,11 @@ Solução: Ajustou-se a rota no backend para garantir que postsCollection fosse 
 
 ## Status atual:
 
-- Projeto pronto no ambiente local.
-- Em necessidade de dockerização para deploy.
+- ~~Projeto pronto no ambiente local.~~
+- ~~Em necessidade de dockerização para deploy.~~
+- Projeto dockerizado e "deployado" no render.com.
 
-## Dockerização
+## Passos para Dockerização
 
 - Iniciar aplicação:
 
@@ -254,3 +256,15 @@ O qual foi solucionado ao instalar definições Node:
 ```
 npm install --save-dev @types/node
 ```
+
+## Próximos passos
+
+- Implementar responsividade;
+- Registrar e renderizar data e hora de cada post;
+- Permitir a renderização dos posts dos usuários na home-page;
+- Melhor estilização do painel de gerenciamento de posts;
+- Corrigir modal de deletar post aparecendo fora da tela;
+- Padronizar estilo do aviso de post editado com sucesso; 
+- Adicionar critérios de sign-up;
+- Implementar middleware de autenticação (passport.js);
+- Adicionar versão em inglês;
