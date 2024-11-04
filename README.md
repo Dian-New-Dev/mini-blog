@@ -242,3 +242,15 @@ docker-compose up --build
 - Backend dockerizado e deployado, frontend acessando com sucesso.
 
 - Procedendo à substituição de fetch URLs por variaveis de ambiente. 
+
+- Ao trocar as urls por uma variavel de ambiente, recebi o erro:
+
+```
+Cannot find name 'process'. Do you need to install type definitions for node? Try npm i --save-dev @types/node.ts(2580)`
+```
+
+O qual foi solucionado ao instalar definições Node:
+
+```
+npm install --save-dev @types/node
+```
