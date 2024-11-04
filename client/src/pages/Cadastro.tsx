@@ -45,7 +45,7 @@ const Registrar: React.FC = () => {
 
         //manda o objeto com os dados para o mongoDB
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+            const response = await fetch(`https://infinita-tenebrae-backend.onrender.com/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
