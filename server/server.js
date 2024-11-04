@@ -6,8 +6,15 @@ const app = express();
 const { ObjectId } = require('mongodb');
 require('dotenv').config();
 
+// Configure CORS
+const corsOptions = {
+    origin: 'https://infinita-tenebrae-frontend.onrender.com', // Replace with your actual frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust methods as needed
+    allowedHeaders: ['Content-Type'], // Specify allowed headers
+};
 
-app.use(cors());
+
+app.use(cors(corsOptions)); // Apply CORS options
 app.use(bodyParser.json());
 
 let usuariosCadastrados;
