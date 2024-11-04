@@ -238,3 +238,7 @@ docker-compose down
 ```
 docker-compose up --build
 ```
+
+- Backend dockerizado e deployado, frontend acessando com sucesso.
+
+- Procedendo à substituição de fetch URLs por variaveis de ambiente. 
