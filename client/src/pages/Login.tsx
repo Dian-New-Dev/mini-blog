@@ -7,6 +7,8 @@ import { UserNameContext } from '../context/userNameContext';
 
 const Login: React.FC = () => {
 
+    console.log(import.meta.env.VITE_API_URL)
+
     //para levar o usuario a pagina pessoal se login OK
     const navigate = useNavigate();
 

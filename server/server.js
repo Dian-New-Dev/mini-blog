@@ -6,12 +6,21 @@ const app = express();
 const { ObjectId } = require('mongodb');
 require('dotenv').config();
 
-// Configure CORS
 const corsOptions = {
-    origin: 'https://infinita-tenebrae-frontend.onrender.com', // Replace with your actual frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Adjust methods as needed
-    allowedHeaders: ['Content-Type'], // Specify allowed headers
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin || origin === 'http://localhost:5181' || origin === 'https://infinita-tenebrae-frontend.onrender.com') {
+            callback(null, true); // allow the request
+        } else {
+            callback(new Error('Not allowed by CORS')); // reject the request
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
 };
+
+app.use(cors(corsOptions));
+
 
 
 app.use(cors(corsOptions)); // Apply CORS options
