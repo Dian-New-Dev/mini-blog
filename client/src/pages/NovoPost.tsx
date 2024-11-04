@@ -65,7 +65,7 @@ const NovoPost: React.FC = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:5000/api/novo-post", {
+            const response = await fetch("https://infinita-tenebrae-backend.onrender.com/api/novo-post", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

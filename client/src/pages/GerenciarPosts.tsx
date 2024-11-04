@@ -54,7 +54,7 @@ const GerenciarPosts: React.FC = () => {
             console.log('vamos apagar o seguinte post')
             console.log(postSelecionado)
             const id = postSelecionado._id;
-            fetch(`http://localhost:5000/api/delete-post?id=${id}`, {
+            fetch(`https://infinita-tenebrae-backend.onrender.com/api/delete-post?id=${id}`, {
                 method: 'DELETE'
             })
                 .then((response) => {
@@ -109,7 +109,7 @@ const GerenciarPosts: React.FC = () => {
     
             try {
                 console.log('o valor de postAtualizado sendo passado para fech é' + JSON.stringify(postAtualizado))
-                const response = await fetch(`http://localhost:5000/api/edit-post?id=${postAtualizado.id}`, {
+                const response = await fetch(`https://infinita-tenebrae-backend.onrender.com/api/edit-post?id=${postAtualizado.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

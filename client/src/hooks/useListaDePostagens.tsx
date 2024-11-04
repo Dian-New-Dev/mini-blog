@@ -15,7 +15,7 @@ export const useListaDePostagens = (reRenderizar: number) => {
 
     useEffect(() => {
         if (nomeDoUsuario) {
-            fetch(`http://localhost:5000/api/posts?username=${nomeDoUsuario}`)
+            fetch(`https://infinita-tenebrae-backend.onrender.com/api/posts?username=${nomeDoUsuario}`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
