@@ -10,7 +10,7 @@ const TesteAPI: React.FC = () => {
     const [recebeMap, setRecebeMap] = useState <JSX.Element[]> ([])
 
     useEffect(() => {
-        fetch("https://infinita-tenebrae-backend.onrender.com/api")
+        fetch(`${process.env.REACT_APP_API_URL}/api`)
             .then(response => response.json())
             .then(data => {
                 setBackendData([data]);
