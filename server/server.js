@@ -9,7 +9,7 @@ require('dotenv').config();
 const corsOptions = {
     origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin || origin === 'http://localhost:5181' || origin === 'https://infinita-tenebrae-frontend.onrender.com') {
+        if (!origin || origin === 'http://localhost:5181' || origin === 'https://infinita-tenebrae.onrender.com') {
             callback(null, true); // allow the request
         } else {
             callback(new Error('Not allowed by CORS')); // reject the request
