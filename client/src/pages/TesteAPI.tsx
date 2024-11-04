@@ -10,7 +10,7 @@ const TesteAPI: React.FC = () => {
     const [recebeMap, setRecebeMap] = useState <JSX.Element[]> ([])
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api`)
+        fetch(`${import.meta.env.VITE_API_URL}/api`)
             .then(response => response.json())
             .then(data => {
                 setBackendData([data]);
