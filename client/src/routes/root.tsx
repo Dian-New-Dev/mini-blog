@@ -100,9 +100,9 @@ const Root: React.FC = () => {
                             this website in English.
                         </p>
 
-                        <button className="bg-[#174936] rounded-lg p-2 border border-gray-700 hover:bg-green-950 hover:scale-110 font-bold" onClick={abrirSite}>
-                            <p>
-                                Enter
+                        <button className="bg-[#174936] rounded-lg p-2 border border-gray-700 pointer-events-none font-bold">
+                            <p className="italic text-gray-500">
+                                Soon
                             </p>
                         </button>
                     </div>
